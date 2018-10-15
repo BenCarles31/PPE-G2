@@ -116,7 +116,7 @@ class UtilisateurDAO extends DAO {
           $sth = null;
           //verifie le type de l'utilisateur
           if($user_type ==1){
-          $sql = "select * from bordereau where ID_bordereau = :id";
+          $sql = "select * from ligne_frais where ID_bordereau = :id";
           $params = array(
             ':id'=>$id_bordereau);
           $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère

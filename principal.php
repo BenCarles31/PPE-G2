@@ -8,6 +8,12 @@ include 'classes/Utilisateur.php';
 $con=db_connect();
 $utilisateur = new UtilisateurDAO();
 $utilisateur_connecter = $utilisateur->find($_SESSION['id_user']);
+
+//recuperation des motifs dans la base pour la liste deroulante (pb 2 entrees BDD DAO, fonc)
+$rows=select_motif($con);
+foreach($rows as $row){
+ $tabmotif[$row['idMotif']] = $row['libelle'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +58,9 @@ $utilisateur_connecter = $utilisateur->find($_SESSION['id_user']);
                 </div>
 
                 <!-- ouvre le dialog pour visualiser le bordereau en cours -->
-                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
-                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
-                    <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne de frais</span>
+                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_afficher_bordereau')">
+                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_afficher_bordereau')"></span>
+                    <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_bordereau')">Afficher bordereau</span>
                 </div>
             </div>
         </div>
@@ -71,7 +77,7 @@ $utilisateur_connecter = $utilisateur->find($_SESSION['id_user']);
     <!-- affiche le formulaire pour ajouter une ligne de frais (include)-->
     <div class="mw-25" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
     <!-- affiche le bordereau en cours (include)-->
-    <div class="mw-25" id="W_afficher_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
+    <div class="w-100" id="W_afficher_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
