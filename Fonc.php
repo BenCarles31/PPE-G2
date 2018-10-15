@@ -107,6 +107,24 @@ function select_motif($con){
 }
 
 /*******************************************************************************/
+     //fonction select tout les indemnite
+/*******************************************************************************/
+function select_indemnite($con){
+  $sql ='SELECT * FROM indemnite';
+
+  //execution de la requete
+  try {
+      $sth = $con->prepare($sql);
+      $sth->execute();
+      $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+      return $rows;
+
+  } catch (PDOException $ex) {
+      die("Erreur lors de la requête SQL : " . $ex->getMessage());
+  }
+}
+
+/*******************************************************************************/
      //fonction verif login adherent
 /*******************************************************************************/
 function verif_login_adherent($identifiant,$mdp,$con){
