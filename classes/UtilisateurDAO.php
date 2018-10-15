@@ -84,15 +84,14 @@ class UtilisateurDAO extends DAO {
         return $nb; // Retourne le nombre de mise à jour
       } // insert()
 
-      function creation_bordereau($date,$id_user,$annee,$user_type) {
+      function creation_bordereau($date,$id_user,$user_type) {
         $nb = null;
         //vérifie le type de l'utilisateur
         if($user_type == 1){
-          $sql = "insert into bordereau values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau);";
+          $sql = "insert into bordereau values ('',:date,:id_user);";
           $params = array(
-            ':date'=>$annee,
-            ':id_user'=>$id_user,
-            ':annee'=>$annee
+            ':date'=>$date,
+            ':id_user'=>$id_user
           );
           $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
           $nb = $sth->rowcount();
@@ -101,6 +100,7 @@ class UtilisateurDAO extends DAO {
       } // insert()
 
       function search_bordereau_encours($id_user,$user_type){
+          //rajouter l'annee dans where
           $sth = null;
           //verifie le type de l'utilisateur
           if($user_type ==1){
@@ -112,6 +112,17 @@ class UtilisateurDAO extends DAO {
         return $sth;
       } // function search_bordereau_encours()
 
+      function search_ligne_frais($id_bordereau,$user_type){
+          $sth = null;
+          //verifie le type de l'utilisateur
+          if($user_type ==1){
+          $sql = "select * from bordereau where ID_bordereau = :id";
+          $params = array(
+            ':id'=>$id_bordereau);
+          $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+        }
+        return $sth;
+      } // function search_ligne_frais_encours()
 
 
 

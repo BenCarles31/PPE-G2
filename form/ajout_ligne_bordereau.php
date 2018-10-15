@@ -4,18 +4,27 @@ $rows=select_motif($con);
 foreach($rows as $row){
  $tabmotif[$row['idMotif']] = $row['libelle'];
 }
-//recup formulaire inscription
+//recup formulaire
 $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
-$date_frais = isset($_POST['nom']) ? $_POST['nom'] : '';
+$date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
 $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
-$trajet = isset($_POST['trajet']) ? $_POST['trajet'] : '';
-$km = isset($_POST['KM']) ? $_POST['KM'] : '';
-$peages = isset($_POST['peages']) ? $_POST['peages'] : '';
-$repas = isset($_POST['repas']) ? $_POST['repas'] : '';
-$hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : '';
+$trajet = isset($_POST['trajet']) ? $_POST['trajet'] : 'null';
+$km = isset($_POST['KM']) ? $_POST['KM'] : 'null';
+$peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
+$repas = isset($_POST['repas']) ? $_POST['repas'] : 'null';
+$hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 
 if($valid_ajout_ligne_bordereau==1){
-  
+  echo '</br></br><p>'.$motif.'</p></br></br>';
+  $bord_en_cours=$utilisateur->search_bordereau_encours($utilisateur_connecter->get_id_user(),$utilisateur_connecter->get_ID_type());
+
+  //rajouter condition sur l'annee
+  foreach($bord_en_cours as $bord_en_cour){
+    $id_bord_encours = $bord_en_cour['ID_bordereau'];
+  }
+
+  $utilisateur->insert_ligne_frais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$id_bord_encours,$utilisateur_connecter->get_ID_type());
+
 }
 
 
@@ -38,7 +47,7 @@ if($valid_ajout_ligne_bordereau==1){
 
             <div class="form-group">
               <label>Motif:</label>
-              <select data-role="select" data-validate="required not=-1" name="club" size=1>
+              <select data-role="select" data-validate="required not=-1" name="motif" size=1>
             	<option value="-1" class="d-none"></option>
               <?php
                  //affiche le res de la requete select tout les club dans liste deroulante
