@@ -1,9 +1,6 @@
 <?php
 session_start();
-include "Fonc.php";
-include 'classes/DAO.php';
-include 'classes/UtilisateurDAO.php';
-include 'classes/Utilisateur.php';
+include "init.php";
 //connexion pour requete affichage dans formulaire pb 2 entree dans la base
 $con=db_connect();
 $utilisateur = new UtilisateurDAO();

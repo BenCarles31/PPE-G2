@@ -1,4 +1,6 @@
 <?php
+include "Fonc.php";
+
 //
 // Initialisations dans chaque page
 //
