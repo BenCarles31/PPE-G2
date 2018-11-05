@@ -1,5 +1,5 @@
 <?php
-include "Fonc.php";
+include "init.php";
 session_start();
 
 //par defaut pour tester

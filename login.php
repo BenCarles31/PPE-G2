@@ -1,8 +1,5 @@
 <?php
-include "Fonc.php";
-include 'classes/DAO.php';
-include 'classes/UtilisateurDAO.php';
-include 'classes/Utilisateur.php';
+include "init.php";
 
 $user = new UtilisateurDAO();
 $id_user_connected = 0;
@@ -57,10 +54,10 @@ $_SESSION['type_user']=0;
 
         </div>
         <!-- affiche le formulaire de connexion adherent (include)-->
-        <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_adherent.php'; ?></div>
+        <div class="mw-25" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/login_adherent.php'; ?></div>
 
         <!-- affiche le formulaire de connexion CRIB/treso (include) -->
-        <div class="dialog" id="W_login_admin" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_crib_treso.php'; ?></div>
+        <div class="mw-25" id="W_login_admin" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/login_crib_treso.php'; ?></div>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
