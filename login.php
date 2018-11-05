@@ -57,10 +57,10 @@ $_SESSION['type_user']=0;
 
         </div>
         <!-- affiche le formulaire de connexion adherent (include)-->
-        <div class="mw-25" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/login_adherent.php'; ?></div>
+        <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_adherent.php'; ?></div>
 
         <!-- affiche le formulaire de connexion CRIB/treso (include) -->
-        <div class="mw-25" id="W_login_admin" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/login_crib_treso.php'; ?></div>
+        <div class="dialog" id="W_login_admin" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_crib_treso.php'; ?></div>
 
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
