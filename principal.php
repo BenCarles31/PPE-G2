@@ -71,11 +71,11 @@ foreach($rows as $row){
       }
     ?>
     <!-- affiche la creation d'un bordereau (include)-->
-    <div class="mw-25" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/creer_bordereau.php'; ?></div>
+    <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
     <!-- affiche le formulaire pour ajouter un adherent (include)-->
-    <div class="mw-25" id="W_ajout_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/ajout_adherent.php'; ?></div>
+    <div class="dialog" id="W_ajout_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_adherent.php'; ?></div>
     <!-- affiche le formulaire pour ajouter une ligne de frais (include)-->
-    <div class="mw-25" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
+    <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
     <!-- affiche le bordereau en cours (include)-->
     <div class="w-100" id="W_afficher_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
 
