@@ -124,6 +124,17 @@ class UtilisateurDAO extends DAO {
         return $sth;
       } // function search_ligne_frais_encours()
 
+      function delete_ligne_frais($id_bordereau,$user_type){
+          $sth = null;
+          //verifie le type de l'utilisateur
+          if($user_type ==1){
+          $sql = "delete from ligne_frais where id_ligne = :id";
+          $params = array(
+            ':id'=>$id_bordereau);
+          $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+        }
+        return $sth;
+      } // function search_ligne_frais_encours()
 
 
 }

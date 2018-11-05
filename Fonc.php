@@ -142,44 +142,20 @@ function verif_login_adherent($identifiant,$mdp,$con){
   }
 }
 
-/*******************************************************************************/
-     //fonction verif login CRID/treso
-/*******************************************************************************/
-function verif_login_crib_treso($identifiant,$mdp,$con){
-    $sql ='SELECT * FROM crib_treso WHERE mail=:identifiant AND mdp=:pass';
+function aff_tbody_form_modif_suppr($nom1,$nom2,$valeur1,$nom_sub1,$nom_sub2){
+  echo('<td><form action="#" method="POST">
+              <input type="hidden" name='.$nom1.' value='.$valeur1.'>
+              <input type="hidden" name='.$nom_sub1.' value="1">
+              <button class="button success" onclick="Metro.dialog.open(\'#W_ajout_ligne_bordereau\')">Modifier</button>
 
-    //execution de la requete
-    try {
-        $sth = $con->prepare($sql);
-        $sth->execute(array(':identifiant' => $identifiant,
-                            ':pass' => $mdp));
-        $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
-        return $rows;
-    } catch (PDOException $ex) {
-        die("Erreur lors de la requête SQL : " . $ex->getMessage());
-    }
-  }
+              <input type="hidden" name='.$nom2.' value='.$valeur1.'>
+              <input type="hidden" name='.$nom_sub2.' value="1">
+              <input type="submit" class="button alert" value="Supprimer">
+            </form>
+       </td>');
+}
 
-/*******************************************************************************/
-     //fonction creation 1 ligne bordereau
-/*******************************************************************************/
-function create_line_bord($license,$nom,$prenom,$sexe,$naissance,$mail,$adresse,$cp,$ville,$mdp,$type,$club,$con){
-    $sql = 'INSERT INTO adherent VALUES ("",:nom,:prenom,:adresse,:cp,:ville,:email,:mdp,:type_user);';
 
-      //execution de la requete
-      try {
-          $sth = $con->prepare($sql);
-          $sth->execute(array(':nom'=>$nom,
-                              ':prenom'=>$prenom,
-                              ':email'=>$mail,
-                              ':adresse'=>$adresse,
-                              ':cp'=>$cp,
-                              ':ville'=>$ville,
-                              ':mdp'=>$mdp,
-                              ':type_user'=>$type));
-        } catch (PDOException $ex) {
-          die("Erreur lors de la requête SQL d'inscription: " . $ex->getMessage());
-        }
-    }
+
 
 ?>

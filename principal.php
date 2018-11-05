@@ -75,6 +75,8 @@ foreach($rows as $row){
     <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
     <!-- affiche le bordereau en cours (include)-->
     <div class="w-100" id="W_afficher_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
+    <!-- affiche le formulaire pour modifier une ligne de frais (include)-->
+    <div class="dialog" id="W_modifier_ligne" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

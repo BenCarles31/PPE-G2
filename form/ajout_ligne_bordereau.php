@@ -4,6 +4,14 @@ $rows=select_motif($con);
 foreach($rows as $row){
  $tabmotif[$row['idMotif']] = $row['libelle'];
 }
+//recup en cas de modification (suppr puis insert)
+$valid_modification = isset($_POST['modifier']) ? $_POST['modifier'] : '0';
+$id_ligne_modifier = isset($_POST['ligne_modifier']) ? $_POST['ligne_modifier'] : '';
+
+if($valid_modification==1){
+  $utilisateur->delete_ligne_frais($id_ligne_modifier,$utilisateur_connecter->get_ID_type());
+}
+
 //recup formulaire
 $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
 $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
