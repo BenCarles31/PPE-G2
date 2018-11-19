@@ -2,7 +2,7 @@
 
 class Bordereau {
   // Attributs
-  private $ID_bordereau=0;
+  private $ID_bordereau="???";
   private $date_bordereau="???";
   private $id_user="???";
 
@@ -38,19 +38,17 @@ class Bordereau {
   }
 
 
-   /**
+  /**
    * Hydrateur
    * Alimente les propriétés à partir d'un tableau
    * @param array $tableau
    */
   function hydrater(array $tableau) {
     foreach ($tableau as $cle => $valeur) {
-      $methode = 'set__' . $cle;
+      $methode = 'set_' . $cle;
       if (method_exists($this, $methode)) {
         $this->$methode($valeur);
       }
     }
   }
 }
-
-?>

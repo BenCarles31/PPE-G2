@@ -1,13 +1,4 @@
 <?php
-<<<<<<< HEAD
-<<<<<<< HEAD
-//include "Fonc.php";
-=======
-include "Fonc.php";
->>>>>>> 9e52400773ee7e8434271dd834621330bab54e37
-=======
-//include "Fonc.php";
->>>>>>> 489dc6bd60a74e13432daf4b851333a974b5f0bf
 
 //
 // Initialisations dans chaque page

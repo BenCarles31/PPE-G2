@@ -6,7 +6,7 @@ Class BordereauDAO extends DAO{
     $params = array(":idBordereau" => $idBordereau);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
-    if ($row !==FALSE) {
+    if ($row) {
       $bordereau = new Bordereau($row);
     } else {
       $bordereau = new Bordereau();
@@ -15,9 +15,9 @@ Class BordereauDAO extends DAO{
     return $bordereau;
   }
 
-  function findByResponsable($idResponsable){
-    $sql = "select * from bordereau where id_user=:idUser";
-    $params = array(":idUser" => $idResponsable);
+  function findBordByIdUser($idResponsable){
+    $sql = "select * from bordereau where id_user=:id";
+    $params = array(":id" => $idResponsable);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
     if ($row !==FALSE) {

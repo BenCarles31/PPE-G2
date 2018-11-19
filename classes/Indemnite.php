@@ -1,8 +1,8 @@
 <?php
-class Motif {
+class Indemnite {
   // Attributs
-  private $idMotif=0;
-  private $libelle="???";
+  private $annee="0000-00-00";
+  private $tarif_kilometrique="???";
 
   function __construct(array $tableau = null) {
     if ($tableau != null) {
@@ -10,21 +10,22 @@ class Motif {
     }
   }
 
-  function get_IdMotif() {
-      return $this->idMotif;
+  function get_Annee() {
+      return $this->annee;
   }
 
-  function get_Libelle() {
-      return $this->libelle;
+  function get_Tarif_kilometrique() {
+      return $this->tarif_kilometrique;
   }
 
-  function set_IdMotif($idMotif) {
-      $this->idMotif = $idMotif;
+  function set_Annee($annee) {
+      $this->annee = $annee;
   }
 
-  function set_Libelle($libelle) {
-      $this->libelle = $libelle;
+  function set_Tarif_kilometrique($tarif_kilometrique) {
+      $this->tarif_kilometrique = $tarif_kilometrique;
   }
+
 
   /**
    * Hydrateur
