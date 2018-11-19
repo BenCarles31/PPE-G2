@@ -1,5 +1,9 @@
 <?php
+<<<<<<< HEAD
 //include "Fonc.php";
+=======
+include "Fonc.php";
+>>>>>>> 9e52400773ee7e8434271dd834621330bab54e37
 
 //
 // Initialisations dans chaque page
