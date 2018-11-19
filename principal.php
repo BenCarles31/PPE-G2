@@ -2,6 +2,7 @@
 session_start();
 include "init.php";
 <<<<<<< HEAD
+<<<<<<< HEAD
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
 
@@ -23,24 +24,33 @@ echo '<p>'.$userConnecte->get_id_user().'</p>';
 $con=db_connect();
 $utilisateur = new UtilisateurDAO();
 $utilisateur_connecter = $utilisateur->find($_SESSION['id_user']);
+=======
+$responsableDAO = new ResponsableDAO ();
+$generalDAO = new GeneralDAO();
+>>>>>>> 489dc6bd60a74e13432daf4b851333a974b5f0bf
 
-//recuperation des motifs dans la base pour la liste deroulante (pb 2 entrees BDD DAO, fonc)
-$rows=select_motif($con);
-foreach($rows as $row){
- $tabmotif[$row['idMotif']] = $row['libelle'];
+if($_SESSION['typeUser']==1){
+  $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 }
+echo '<p>'.$_SESSION['idUser'].'</p>';
+echo '<p>'.$userConnecte->get_id_user().'</p>';
+
 ?>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
+<html>
+<head lang="fr">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<<<<<<< HEAD
 >>>>>>> 9e52400773ee7e8434271dd834621330bab54e37
+=======
+    <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
+>>>>>>> 489dc6bd60a74e13432daf4b851333a974b5f0bf
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro.min.css">
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-rtl.min.css">
     <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-icons.min.css">
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     <title>Fredi</title>
@@ -98,76 +108,58 @@ foreach($rows as $row){
       <div class="container-fluid start-screen no-overflow">
           <h1 class="start-screen-title">Fredi</h1></br>
 
+=======
+>>>>>>> 489dc6bd60a74e13432daf4b851333a974b5f0bf
 
-      <?php if($_SESSION['id_user']!=0 && $_SESSION['type_user']==1)
-        {
-      ?>
-        <div class="tiles-area">
-          <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Responsable">
-                <!-- ouvre le dialog pour ajouter un adherent -->
-                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_adherent')">
-                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_adherent')"></span>
-                    <span class="branding-bar"onclick="Metro.dialog.open('#W_ajout_adherent')">Ajouter un adherent</span>
-                </div>
+    <title>Fredi</title>
 
-                <!-- ouvre le dialog pour creer un bordereau -->
-                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_creation_bordereau')">
-                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_creation_bordereau')"></span>
-                    <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
-                </div>
+</head>
+<body  class="bg-dark fg-white">
+  <h1 class="start-screen-title">Fredi</h1></br>
+  <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_adherent.php'; ?></div>
+  <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
 
-                <!-- ouvre le dialog pour ajouter une ligne de frais -->
-                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
-                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
-                    <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne de frais</span>
-                </div>
+  <div class="tiles-area">
+    <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
+          <!-- ouvre le dialog pour creer un bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
+              <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
+              <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
+          </div>
+          <!-- ouvre le dialog pour creer un bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login_adherent')">
+              <span class="mif-github icon" onclick="Metro.dialog.open('#W_login_adherent')"></span>
+              <span class="branding-bar" onclick="Metro.dialog.open('#W_login_adherent')">Login adhérents</span>
+          </div>
 
-                <!-- ouvre le dialog pour visualiser le bordereau en cours -->
-                <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_afficher_bordereau')">
-                    <span class="mif-github icon" onclick="Metro.dialog.open('#W_afficher_bordereau')"></span>
-                    <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_bordereau')">Afficher bordereau</span>
-                </div>
-            </div>
-        </div>
+      </div>
+  </div>
 
-    <?php
-      }else{
-        echo ('La tuile');
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  <script>
+      function invalidForm(){
+          var form  = $(this);
+          form.addClass("ani-ring");
+          setTimeout(function(){
+              form.removeClass("ani-ring");
+          }, 1000);
       }
-    ?>
-    <!-- affiche la creation d'un bordereau (include)-->
-    <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
-    <!-- affiche le formulaire pour ajouter un adherent (include)-->
-    <div class="dialog" id="W_ajout_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_adherent.php'; ?></div>
-    <!-- affiche le formulaire pour ajouter une ligne de frais (include)-->
-    <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
-    <!-- affiche le bordereau en cours (include)-->
-    <div class="w-100" id="W_afficher_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="50%"><?php include 'form/afficher_bordereau.php'; ?></div>
-    <!-- affiche le formulaire pour modifier une ligne de frais (include)-->
-    <div class="dialog" id="W_modifier_ligne" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/ajout_ligne_bordereau.php'; ?></div>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-    <script>
-        function invalidForm(){
-            var form  = $(this);
-            form.addClass("ani-ring");
-            setTimeout(function(){
-                form.removeClass("ani-ring");
-            }, 1000);
-        }
-        function validateForm(){
-            $(".login-form").animate({
-                opacity: 0
-            });
-        }
-    </script>
-    <script language="javascript" type="text/javascript">
-    function redirection(test_form) {
-      document.getElementById(test_form).submit();
-    }
+      function validateForm(){
+          $(".login-form").animate({
+              opacity: 0
+          });
+      }
   </script>
+<<<<<<< HEAD
   </body>
 >>>>>>> 9e52400773ee7e8434271dd834621330bab54e37
+=======
+  <script language="javascript" type="text/javascript">
+  function redirection(test_form) {
+    document.getElementById(test_form).submit();
+  }
+</script>
+</body>
+>>>>>>> 489dc6bd60a74e13432daf4b851333a974b5f0bf
 </html>
