@@ -1,5 +1,5 @@
 <?php
-include "Fonc.php";
+//include "Fonc.php";
 
 //
 // Initialisations dans chaque page
