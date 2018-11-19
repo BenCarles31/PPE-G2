@@ -1,9 +1,6 @@
 <?php
   //recuperation des club dans la base pour la liste deroulante (pb 2 entrees BDD DAO, fonc)
-  $rows=select_club($con);
-  foreach($rows as $row){
-   $club[$row['ID_club']] = $row['nom_club'];
-  }
+   $clubs = $generalDAO->findAllClub();
 
   //recup formulaire inscription
   $valid_ajout_adherent = isset($_POST['valid_ajout_adherent']) ? $_POST['valid_ajout_adherent'] : '0';
@@ -14,23 +11,14 @@
   $sexe = isset($_POST['sexe']) ? $_POST['sexe'] : '';
   $ajout_club = isset($_POST['club']) ? $_POST['club'] : '';
 
-  //recreer un objet avec id recup precedement (a mon avis useless peu utiliser var session creer a la connexion direct)
-  $utilisateur_connecter = $utilisateur->find($_SESSION['id_user']);
-
-  //verifie que le formulaire a bien etait envoye
-  if($valid_ajout_adherent == 1){
-    //ajoute un adherent
-    $utilisateur->insert_new_adherent($num_license,$nom,$prenom,$sexe,$date_naiss,$ajout_club,$utilisateur_connecter->get_id_user(),$utilisateur_connecter->get_ID_type());
+  if($valid_ajout_adherent==1){
+    $responsableDAO->addAdherent($num_license,$nom,$prenom,$sexe,$date_naiss,$ajout_club,$userConnecte->get_id_user());
   }
-?>
 
+?>
 <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"
-            data-role="validator"
-            action="#"
-            method="POST"
-            data-clear-invalid="2000"
-            data-on-error-form="invalidForm"
-            data-on-validate-form="validateForm">
+      action="#"
+      method="POST">
 
         <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
         <h2 class="text-light">Ajouter un adherent</h2>
@@ -55,9 +43,9 @@
             <div class="form-group">
               <label>Sexe:</label>
             	<select data-role="select" name="sexe" size=3>
-              	<option value="Masculin">Masculin</option>
-                <option value="Feminin">Feminin</option>
-                <option value="Non-binaire">Non-binaire</option>
+              	<option value="1">Masculin</option>
+                <option value="2">Feminin</option>
+                <option value="3">Non-binaire</option>
             	</select>
             </div>
 
@@ -67,8 +55,8 @@
             	<option value="-1" class="d-none"></option>
               <?php
                  //affiche le res de la requete select tout les club dans liste deroulante
-                 foreach($club as $cle=>$valeur){
-                   echo('<option value="'.$cle.'">'.$valeur.'</option>');
+                 foreach($clubs as $club){
+                   echo('<option value="'.$club['ID_club'].'">'.$club['nom_club'].'</option>');
                  }
               ?>
             	</select>
