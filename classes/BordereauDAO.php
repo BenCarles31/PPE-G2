@@ -42,5 +42,23 @@ Class BordereauDAO extends DAO{
     return $tableau;
   }
 
+  function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau){
+    $nb=null;
+    $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau);";
+    $params = array(
+      ':date'=>$date,
+      ':trajet'=>$trajet,
+      ':km'=>$km,
+      ':cout_peages'=>$peages,
+      ':cout_repas'=>$repas,
+      ':cout_hebergement'=>$hebergement,
+      ':id_motif'=>$motif,
+      ':id_bordereau'=>$idBordereau
+    );
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+  }
+
 }
  ?>

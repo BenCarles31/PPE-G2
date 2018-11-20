@@ -1,21 +1,9 @@
 <?php
-
-$bordereauDAO = new BordereauDAO();
-$motifDAO = new MotifDAO();
-$indemniteDAO = new IndemniteDAO();
-$Motifs = $motifDAO->findAll();
 $Indemnites = $indemniteDAO->findAll();
-$bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
 $LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
 
 $cout_km=0;
 $total_bord =0;
-
-$nom1 = "ligne_modifier";
-$sub1 = "modifier";
-
-$nom2 = "ligne_supprimer";
-$sub2 = "supprimer";
 
   echo '<table class="table striped table-border">';
   //entete du tableau
@@ -55,12 +43,12 @@ $sub2 = "supprimer";
 
 
        echo('<td><form action="#" method="POST">
-                  <input type="hidden" name='.$nom1.' value='.$LigneFrais->get_Id_ligne().'>
-                  <input type="hidden" name='.$sub1.' value="1">
-                  <button class="button success" onclick="Metro.dialog.open(\'#W_ajout_ligne_frais\')">Modifier</button>
+                  <input type="hidden" name="ligne_modifier" value='.$LigneFrais->get_Id_ligne().'>
+                  <input type="hidden" name="modifier" value="1">
+                  <button class="button success" onclick="Metro.dialog.open(\'#W_ajout_ligne_frais\');Metro.dialog.close(\'#W_aff_bordereau\')">Modifier</button>
 
-                  <input type="hidden" name='.$nom2.' value='.$LigneFrais->get_Id_ligne().'>
-                  <input type="hidden" name='.$sub2.' value="1">
+                  <input type="hidden" name="ligne_supprimer" value='.$LigneFrais->get_Id_ligne().'>
+                  <input type="hidden" name="supprimer" value="1">
                   <input type="submit" class="button alert" value="Supprimer">
                 </form>
            </td>');

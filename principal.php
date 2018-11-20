@@ -3,9 +3,14 @@ session_start();
 include "init.php";
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
+$bordereauDAO = new BordereauDAO();
+$indemniteDAO = new IndemniteDAO();
+$motifDAO = new MotifDAO();
+$Motifs = $motifDAO->findAll();
 
 if($_SESSION['typeUser']==1){
   $userConnecte = $responsableDAO->find($_SESSION['idUser']);
+  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
 }
 ?>
 <!DOCTYPE html>
@@ -30,12 +35,12 @@ if($_SESSION['typeUser']==1){
 
   <div class="tiles-area">
     <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
-          <!-- ouvre le dialog pour creer un bordereau -->
+          <!-- ouvre le dialog pour afficher le bordereau -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
               <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
               <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
           </div>
-          <!-- ouvre le dialog pour creer un bordereau -->
+          <!-- ouvre le dialog pour ajouter une ligne de frais -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
               <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
               <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
