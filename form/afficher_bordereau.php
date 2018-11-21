@@ -42,11 +42,8 @@ $total_bord =0;
       $total_bord = $total_bord + $LigneFrais->get_Cout_peages() + $LigneFrais->get_Cout_repas() + $LigneFrais->get_Cout_hebergement() + $cout_km;
 
 
-       echo('<td><form action="#" method="POST">
-                  <input type="hidden" name="ligne_modifier" value='.$LigneFrais->get_Id_ligne().'>
-                  <input type="hidden" name="modifier" value="1">
-                  <button class="button success" onclick="Metro.dialog.open(\'#W_ajout_ligne_frais\');Metro.dialog.close(\'#W_aff_bordereau\')">Modifier</button>
-
+       echo('<td><p><a href="update_ligne.php?idLigne='.$LigneFrais->get_Id_ligne().'"><button class="button success">Modifier</button></a></p>
+                <form action="#" method="POST">
                   <input type="hidden" name="ligne_supprimer" value='.$LigneFrais->get_Id_ligne().'>
                   <input type="hidden" name="supprimer" value="1">
                   <input type="submit" class="button alert" value="Supprimer">

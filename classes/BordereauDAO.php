@@ -42,6 +42,45 @@ Class BordereauDAO extends DAO{
     return $tableau;
   }
 
+  function findUneLigne($idligne){
+    $sql = "select * from ligne_frais where id_ligne=:idLigne";
+    $params = array(":idLigne" => $idligne);
+    $sth = $this->executer($sql, $params);
+    $row = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+      $ligne = new LigneFrais($row);
+    } else {
+      $ligne = new LigneFrais();
+    }
+    // Retourne l'objet métier
+    return $ligne;
+  }
+
+  function update($idligne,$date,$trajet,$km,$peages,$repas,$hebergement,$motif){
+    $sql="update `ligne_frais` SET  `date_frais`=:date,
+                                    `trajet`=:trajet,
+                                    `KM`=:km,
+                                    `cout_peages`=:cout_peages,
+                                    `cout_repas`=:cout_repas,
+                                    `cout_hebergement`=:cout_hebergement,
+                                    `idMotif`=:id_motif
+          WHERE id_ligne=:idLigne";
+    $params = array(
+      ':date'=>$date,
+      ':trajet'=>$trajet,
+      ':km'=>$km,
+      ':cout_peages'=>$peages,
+      ':cout_repas'=>$repas,
+      ':cout_hebergement'=>$hebergement,
+      ':id_motif'=>$motif,
+      ':idLigne'=>$idligne
+    );
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+
+  }
+
   function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau){
     $nb=null;
     $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau);";
