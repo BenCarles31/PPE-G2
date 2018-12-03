@@ -1,17 +1,14 @@
 <?php
-include "init.php";
 session_start();
-
+include "init.php";
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
 $Motifs = $motifDAO->findAll();
-echo ($_SESSION['typeUser']);
 
-
-if($_SESSION['typeUser'] == 1){
+if($_SESSION['typeUser']==1){
   $userConnecte = $responsableDAO->find($_SESSION['idUser']);
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
 }
@@ -57,9 +54,9 @@ if($_SESSION['typeUser'] == 1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
         </div>
         <!-- ouvre le dialog pour ajouter une ligne de frais -->
-        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_ligne_frais')">
-          <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_ligne_frais')"></span>
-          <span class="branding-bar" onclick="Metro.dialog.open('#W_add_ligne_frais')">Ajouter ligne frais</span>
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
         </div>
         <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
@@ -82,9 +79,9 @@ if($_SESSION['typeUser'] == 1){
     }
     if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
       ?>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
-      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
-      <div class="dialog" id="W_login" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
+      <div class="dialog" id="W_acceder_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
+      <div class="dialog" id="W_afficher_justificatif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
+      <div class="dialog" id="W_logout" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Tresorier">
@@ -99,9 +96,9 @@ if($_SESSION['typeUser'] == 1){
             <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_justificatif')">Afficher justificatif</span>
           </div>
           <!-- ouvre le dialog pour se déconnecter -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login')">
-              <span class="mif-github icon" onclick="Metro.dialog.open('#W_login')"></span>
-              <span class="branding-bar" onclick="Metro.dialog.open('#W_login')">Déconnexion</span>
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_logout')">
+              <span class="mif-github icon" onclick="Metro.dialog.open('#W_logout')"></span>
+              <span class="branding-bar" onclick="Metro.dialog.open('#W_logout')">Déconnexion</span>
           </div>
         </div>
       </div>
@@ -110,10 +107,10 @@ if($_SESSION['typeUser'] == 1){
 
     if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
       ?>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/affilier_club.php'; ?></div>
-      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/add_tarif_kilometrique'; ?></div>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_motif_frais.php'; ?></div>
-      <div class="dialog" id="W_login" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
+      <div class="dialog" id="W_affilier_club" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/affilier_club.php'; ?></div>
+      <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/add_tarif_kilometrique'; ?></div>
+      <div class="dialog" id="W_add_motif_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_motif_frais.php'; ?></div>
+      <div class="dialog" id="W_logout" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
@@ -133,9 +130,9 @@ if($_SESSION['typeUser'] == 1){
             <span class="branding-bar" onclick="Metro.dialog.open('#W_add_motif_frais')">Motif de frais</span>
           </div>
           <!-- ouvre le dialog pour se déconnecter -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login')">
-              <span class="mif-github icon" onclick="Metro.dialog.open('#W_login')"></span>
-              <span class="branding-bar" onclick="Metro.dialog.open('#W_login')">Déconnexion</span>
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_logout')">
+              <span class="mif-github icon" onclick="Metro.dialog.open('#W_logout')"></span>
+              <span class="branding-bar" onclick="Metro.dialog.open('#W_logout')">Déconnexion</span>
           </div>
         </div>
       </div>
