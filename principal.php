@@ -1,14 +1,17 @@
 <?php
-session_start();
 include "init.php";
+session_start();
+
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
 $Motifs = $motifDAO->findAll();
+echo ($_SESSION['typeUser']);
 
-if($_SESSION['typeUser']==1){
+
+if($_SESSION['typeUser'] == 1){
   $userConnecte = $responsableDAO->find($_SESSION['idUser']);
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
 }
@@ -40,7 +43,7 @@ if($_SESSION['typeUser']==1){
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
       <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_ligne_frais.php'; ?></div>
       <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_profil.php'; ?></div>
-      <div class="dialog" id="W_login" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
+      <div class="dialog" id="W_logout" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/logout.php'; ?></div>
 
       <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
         <!-- ouvre le dialog pour creer un bordereau -->
@@ -49,9 +52,9 @@ if($_SESSION['typeUser']==1){
             <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
         </div>
         <!-- ouvre le dialog pour afficher le bordereau -->
-        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_bordereau')">
-          <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_bordereau')"></span>
-          <span class="branding-bar" onclick="Metro.dialog.open('#W_add_bordereau')">afficher Bordereau</span>
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
         </div>
         <!-- ouvre le dialog pour ajouter une ligne de frais -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_ligne_frais')">
@@ -69,9 +72,9 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
         <!-- ouvre le dialog pour se déconnecter -->
-        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_login')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_login')">Déconnexion</span>
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_logout')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_logout')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_logout')">Déconnexion</span>
         </div>
 
       </div>
