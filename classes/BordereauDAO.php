@@ -99,5 +99,23 @@ Class BordereauDAO extends DAO{
     return $nb; // Retourne le nombre de mise à jour
   }
 
+    function creation_bordereau($date,$id_user,$user_type) {
+      $nb = null;
+      //vérifie le type de l'utilisateur
+      if($user_type == 1){
+        $sql = "insert into bordereau values ('',:date,:id_user);";
+        $params = array(
+          ':date'=>$date,
+          ':id_user'=>$id_user
+        );
+        $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+        $nb = $sth->rowcount();
+      }
+      return $nb; // Retourne le nombre de mise à jour
+    } // insert()
+
+
+
+
 }
  ?>

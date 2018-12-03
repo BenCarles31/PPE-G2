@@ -29,6 +29,8 @@ if($_SESSION['typeUser']==1){
 </head>
 <body  class="bg-dark fg-white">
   <h1 class="start-screen-title">Fredi</h1></br>
+  <!-- affiche la creation d'un bordereau (include)-->
+  <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
   <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
   <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
   <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_ligne_frais.php'; ?></div>
@@ -39,6 +41,13 @@ if($_SESSION['typeUser']==1){
       {
     ?>
     <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
+      <!-- ouvre le dialog pour creer un bordereau -->
+      <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_creation_bordereau')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_creation_bordereau')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
+      </div>
+
+
           <!-- ouvre le dialog pour afficher le bordereau -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
               <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
