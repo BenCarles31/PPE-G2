@@ -22,7 +22,7 @@ $generalDAO = new GeneralDAO();
     <h1 class="start-screen-title">Fredi</h1></br>
     <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_adherent.php'; ?></div>
     <div class="dialog" id="W_register" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/register.php'; ?></div>
-    <br/><p><a href="test.php">Test</a></p><br/>
+
 
     <div class="tiles-area">
       <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
@@ -34,7 +34,7 @@ $generalDAO = new GeneralDAO();
             <!-- ouvre le dialog pour creer un bordereau -->
             <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login_adherent')">
                 <span class="mif-github icon" onclick="Metro.dialog.open('#W_login_adherent')"></span>
-                <span class="branding-bar" onclick="Metro.dialog.open('#W_login_adherent')">Login adhérents</span>
+                <span class="branding-bar" onclick="Metro.dialog.open('#W_login_adherent')">Connexion</span>
             </div>
 
         </div>
