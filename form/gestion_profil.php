@@ -1,5 +1,5 @@
 <?php
-  echo '<table class="table striped table-border">';
+  echo '<table class="table striped table-border" style="color: black">';
   echo '<tr>';
   echo '<th>nom</th>';
   echo '<td>'.$userConnecte->get_nom().'</td>';
