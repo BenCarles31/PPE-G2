@@ -1,4 +1,12 @@
 <?php
+
+$valid_suppr_ligne_bordereau = isset($_POST['val_suppr']) ? $_POST['val_suppr'] : '';
+$ligne_a_suppr = isset($_POST['ligne_supprimer']) ? $_POST['ligne_supprimer'] : '';
+
+if($valid_suppr_ligne_bordereau){
+  $bordereauDAO->deleteLigne($ligne_a_suppr);
+}
+
 $Indemnites = $indemniteDAO->findAll();
 $LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
 
@@ -45,8 +53,7 @@ $total_bord =0;
        echo('<td><p><a href="update_ligne.php?idLigne='.$LigneFrais->get_Id_ligne().'"><button class="button success">Modifier</button></a></p>
                 <form action="#" method="POST">
                   <input type="hidden" name="ligne_supprimer" value='.$LigneFrais->get_Id_ligne().'>
-                  <input type="hidden" name="supprimer" value="1">
-                  <input type="submit" class="button alert" value="Supprimer">
+                  <input type="submit" name="val_suppr" class="button alert" value="Supprimer">
                 </form>
            </td>');
         echo'</tr>';

@@ -20,7 +20,7 @@ $generalDAO = new GeneralDAO();
 </head>
 	<body  class="bg-dark fg-white">
     <h1 class="start-screen-title">Fredi</h1></br>
-    <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login_adherent.php'; ?></div>
+    <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login.php'; ?></div>
     <div class="dialog" id="W_register" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/register.php'; ?></div>
 
 

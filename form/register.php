@@ -15,6 +15,10 @@ $mdp2 = isset($_POST['mdp2']) ? $_POST['mdp2'] : '';
 if($valid_inscription==1){
   if($mdp1==$mdp2){
     $verif_dispo = $responsableDAO->findAdherentByEmailPass($mail, $mdp1);
+
+      //hashage du mot de passe avec l'algo: sha256
+      //$mdp1 =  hash('sha256',$mdp1);
+
     if(count($verif_dispo)>0){
       $generalDAO->register($nom,$prenom,$mail,$adresse,$cp,$ville,$mdp1,$typeResponsable);
       header('Location: index.php');
