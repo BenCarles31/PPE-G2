@@ -104,7 +104,7 @@ if($valid_modif_ligne_bordereau==1){
                   <input type="text" name="hebergement" data-prepend="<span class='mif-envelop'>" value="<?php echo $ligneModifier->get_Cout_hebergement(); ?>">
               </div>
               <div class="form-group">
-              <button id="test_form" name="valid_modif_ligne_bordereau" value="1" class="button success">Modifier d'une ligne</button><br/>
+                <button id="test_form" name="valid_modif_ligne_bordereau" value="1" class="button success">Modifier d'une ligne</button><br/>
               </div>
       </form>
     </center>

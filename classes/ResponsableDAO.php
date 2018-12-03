@@ -59,6 +59,30 @@ Class ResponsableDAO extends DAO {
     return $nb;
   }
 
+  function update($idUser,$nom,$prenom,$rue,$cp,$ville,$email,$mdp){
+    $sql="update `utilisateur` SET  `nom`=:nom,
+                                    `prenom`=:prenom,
+                                    `rue`=:rue,
+                                    `cp`=:cp,
+                                    `ville`=:ville,
+                                    `email`=:email,
+                                    `mdp`=:mdp
+          WHERE id_user=:idUser";
+    $params = array(
+      ':nom'=>$nom,
+      ':prenom'=>$prenom,
+      ':rue'=>$rue,
+      ':cp'=>$cp,
+      ':ville'=>$ville,
+      ':email'=>$email,
+      ':mdp'=>$mdp,
+      ':idUser'=>$idUser
+    );
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+
+  }
 
 
 

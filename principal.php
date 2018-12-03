@@ -31,9 +31,13 @@ if($_SESSION['typeUser']==1){
   <h1 class="start-screen-title">Fredi</h1></br>
   <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
   <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
-  <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/add_ligne_frais.php'; ?></div>
+  <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_ligne_frais.php'; ?></div>
+  <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_profil.php'; ?></div>
 
   <div class="tiles-area">
+    <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1)
+      {
+    ?>
     <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
           <!-- ouvre le dialog pour afficher le bordereau -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
@@ -52,7 +56,41 @@ if($_SESSION['typeUser']==1){
               <span class="branding-bar" onclick="Metro.dialog.open('#W_add_adherent')">Ajouter adhérents</span>
           </div>
 
+          <!-- ouvre le dialog pour creer un bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
+              <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
+              <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
+          </div>
+
       </div>
+      <?php
+        }
+        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2)
+        {
+      ?>
+      <div class="tiles-area">
+        <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Tresorier">
+          <!-- ouvre le dialog pour acceder au bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_acceder_bordereau')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_acceder_bordereau')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_acceder_bordereau')">Acceder au bordereau</span>
+          </div>
+          <!-- ouvre le dialog pour afficher justificatif -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_afficher_justificatif')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_afficher_justificatif')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_justificatif')">Afficher justificatif</span>
+          </div>
+        </div>
+      </div>
+      <?php
+          }
+          if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3)
+          {
+      ?>
+
+      <?php
+          }
+      ?>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
