@@ -20,21 +20,21 @@ $generalDAO = new GeneralDAO();
 </head>
 	<body  class="bg-dark fg-white">
     <h1 class="start-screen-title">Fredi</h1></br>
-    <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login.php'; ?></div>
+    <div class="dialog" id="W_login" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login.php'; ?></div>
     <div class="dialog" id="W_register" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/register.php'; ?></div>
 
 
     <div class="tiles-area">
       <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
-            <!-- ouvre le dialog pour creer un bordereau -->
+            <!-- ouvre le dialog pour s'inscrire -->
             <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_register')">
                 <span class="mif-github icon" onclick="Metro.dialog.open('#W_register')"></span>
                 <span class="branding-bar" onclick="Metro.dialog.open('#W_register')">Inscription</span>
             </div>
-            <!-- ouvre le dialog pour creer un bordereau -->
-            <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login_adherent')">
-                <span class="mif-github icon" onclick="Metro.dialog.open('#W_login_adherent')"></span>
-                <span class="branding-bar" onclick="Metro.dialog.open('#W_login_adherent')">Connexion</span>
+            <!-- ouvre le dialog pour se connecter -->
+            <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_login')">
+                <span class="mif-github icon" onclick="Metro.dialog.open('#W_login')"></span>
+                <span class="branding-bar" onclick="Metro.dialog.open('#W_login')">Connexion</span>
             </div>
 
         </div>
