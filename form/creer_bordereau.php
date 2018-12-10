@@ -12,8 +12,7 @@ if($valid_creation_bordereau==1){
   if($nb_bord==0){
     $date_courant = Date('Y-m-d');
     echo $date_courant;
-    $date = date();
-    $bordereauDAO->creation_bordereau($date_courant,$userConnecte->get_id_user(),$userConnecte->get_ID_type(),$date,$StatutAttente->get_Id_statut());
+    $bordereauDAO->creation_bordereau($date_courant,$userConnecte->get_id_user(),$userConnecte->get_ID_type(),$StatutAttente->get_Id_statut());
     echo '<p>Sa a peut etre marche, ou pas</p>';
   }else{
     echo '<p>La tuile creation</p>';

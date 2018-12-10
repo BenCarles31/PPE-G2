@@ -133,16 +133,14 @@ Class BordereauDAO extends DAO{
 
   }
 
-  function creation_bordereau($date,$id_user,$user_type,$date1,$statut) {
+  function creation_bordereau($date,$id_user,$user_type,$statut) {
   $nb = null;
-  $date = date();
   //vérifie le type de l'utilisateur
   if($user_type == 1){
-    $sql = "insert into bordereau values ('',:date,:id_user,':date',':statut');";
+    $sql = "insert into bordereau values ('',:date,:id_user,:statut);";
     $params = array(
       ':date'=>$date,
       ':id_user'=>$id_user,
-      ':date'=>$date1,
       ':statut'=>$statut);
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();

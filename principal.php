@@ -44,6 +44,7 @@ echo '<p>'.$_SESSION['idUser'].'</p>';
       <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
+      <div class="dialog" id="W_aff_oldBordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_oldBordereau.php'; ?></div>
       <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_ligne_frais.php'; ?></div>
       <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_profil.php'; ?></div>
 
@@ -59,6 +60,11 @@ echo '<p>'.$_SESSION['idUser'].'</p>';
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
+        </div>
+        <!-- ouvre le dialog pour afficher le bordereau -->
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
         </div>
         <!-- ouvre le dialog pour ajouter une ligne de frais -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
@@ -108,6 +114,13 @@ echo '<p>'.$_SESSION['idUser'].'</p>';
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
           </div>
+
+          <a href="logout.php">
+            <div data-role="tile" class="bg-indigo fg-white">
+                <span class="mif-github icon"></span>
+                <span class="branding-bar">Déconnexion</span>
+            </div>
+          </a>
         </div>
       </div>
       <?php
@@ -144,6 +157,13 @@ echo '<p>'.$_SESSION['idUser'].'</p>';
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
           </div>
+
+          <a href="logout.php">
+            <div data-role="tile" class="bg-indigo fg-white">
+                <span class="mif-github icon"></span>
+                <span class="branding-bar">Déconnexion</span>
+            </div>
+          </a>
         </div>
       </div>
       <?php
