@@ -3,11 +3,11 @@ $validLogin = isset($_POST['validLogin']) ? $_POST['validLogin'] : '0';
 $email = isset($_POST['identifiant']) ? $_POST['identifiant'] : '???';
 $pass = isset($_POST['motdepasse']) ? $_POST['motdepasse'] : '???';
 
-$adherentConnected = 0;
+$adherentConnected = null;
 
 if($validLogin==1){
   $adherentConnected = $responsableDAO->findAdherentByEmailPass($email, $pass);
-  if($adherentConnected!=0){
+  if($adherentConnected!=null){
     $_SESSION['idUser'] = $adherentConnected->get_id_user();
     $_SESSION['typeUser'] = $adherentConnected->get_ID_type();
     header('Location: principal.php');

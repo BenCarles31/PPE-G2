@@ -32,4 +32,4 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
  define('DB_USER','root');
  define('DB_PASSWORD','');
  define('DB_HOST','localhost');
- define('DB_NAME','fredi');
+ define('DB_NAME','newFredi');

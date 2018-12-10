@@ -25,19 +25,18 @@ Class GeneralDAO extends DAO {
     return $rows;
   }
 
-  function findMotifByIdMotif($idMotif){
-    $sql = "select * from motif where idMotif=:idMotif";
-    $params = array(":idMotif" => $idMotif);
-    $sth = $this->executer($sql, $params);
-    $row = $sth->fetch(PDO::FETCH_ASSOC);
-    if ($row !==FALSE) {
-      $motif = new Motif($row);
-    } else {
-      $motif = new Motif();
+  function findAllStatut(){
+    $sql = "select * from statut";
+    $sth = $this->executer($sql);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new Statut($row);
     }
-    // Retourne l'objet métier
-    return $motif;
+    // Retourne un tableau d\'objet métier
+    return $tableau;
   }
+
 
 
 

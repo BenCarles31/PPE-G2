@@ -1,7 +1,7 @@
 <?php
 $valid_creation_bordereau = isset($_POST['valid_creation_bordereau']) ? $_POST['valid_creation_bordereau'] : '0';
 if($valid_creation_bordereau==1){
-  $bord_encours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
+  $bord_encours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
   $nb_bord=0;
   foreach($bord_encours as $bord_encour){
     $nb_bord++;
@@ -12,7 +12,8 @@ if($valid_creation_bordereau==1){
   if($nb_bord==0){
     $date_courant = Date('Y-m-d');
     echo $date_courant;
-    $bordereauDAO->creation_bordereau($date_courant,$userConnecte->get_id_user(),$userConnecte->get_ID_type());
+    $date = date();
+    $bordereauDAO->creation_bordereau($date_courant,$userConnecte->get_id_user(),$userConnecte->get_ID_type(),$date,$StatutAttente->get_Id_statut());
     echo '<p>Sa a peut etre marche, ou pas</p>';
   }else{
     echo '<p>La tuile creation</p>';

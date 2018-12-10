@@ -1,5 +1,7 @@
 <?php
+
 Class ResponsableDAO extends DAO {
+
   function find($idResponsable){
     $sql = "select * from utilisateur where id_user=:idUser";
     $params = array(":idUser" => $idResponsable);
@@ -13,6 +15,7 @@ Class ResponsableDAO extends DAO {
     // Retourne l'objet métier
     return $responsable;
   }
+
   function findAllAdherent() {
     $userType = 1;
     $sql = "select * from utilisateur where ID_type = :type";
@@ -26,6 +29,21 @@ Class ResponsableDAO extends DAO {
     // Retourne un tableau d\'objet métier
     return $tableau;
   }
+
+  function findRespByIdBordeau($idBordereau){
+    $sql = "select * from utilisateur where id_user = (select u.id_user from utilisateur u, bordereau b where b.id_user = u.id_user and ID_bordereau=:idBordereau)";
+    $params = array(":idBordereau" => $idBordereau);
+    $sth = $this->executer($sql, $params);
+    $row = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($row !==FALSE) {
+      $responsable = new Utilisateur($row);
+    } else {
+      $responsable = new Utilisateur();
+    }
+    // Retourne l'objet métier
+    return $responsable;
+  }
+
   function findAdherentByEmailPass($email,$pass) {
     $sql = "select * from utilisateur where email =:mail and mdp =:pass";
     $params = array(":mail" => $email,
@@ -39,6 +57,7 @@ Class ResponsableDAO extends DAO {
     }
     return $adherent;
   }
+
   function addAdherent($license, $nom, $prenom, $sexe, $date_naiss, $club, $id_user) {
     $sql = "insert into adherent values (:num_license,:nom,:prenom,:sexe,:date_naiss,:id_club,:id_user);";
     $params = array(':num_license'=>$license,
@@ -53,6 +72,7 @@ Class ResponsableDAO extends DAO {
     // Retourne le nombre de mise à jour
     return $nb;
   }
+
   function update($idUser,$nom,$prenom,$rue,$cp,$ville,$email,$mdp){
     $sql="update `utilisateur` SET  `nom`=:nom,
                                     `prenom`=:prenom,
@@ -75,41 +95,10 @@ Class ResponsableDAO extends DAO {
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();
     return $nb; // Retourne le nombre de mise à jour
+
   }
 
 
-//normalement ca marche 
-  function updatemdp($mdp,$mail){
-    echo '<p> update mdp</p>';
-    $sql="update `utilisateur` SET  
-                                    `mdp`=:mdp
-                                    WHERE email=:email";
-          $params = array(
-            
-            ':email'=>$mail,
-            ':mdp'=>$mdp
-            
-          );
-    $sth = $this->executer($sql,$params);
-    $nb = $sth->rowcount();
-    // Retourne le nombre de mise à jour
-    return $nb;
-        }
 
 
-        
-    function findAdherentByEmail($mail) {
-      $sql = "select * from utilisateur where email =:email";
-      $params = array(":email" => $mail);
-      $sth = $this->executer($sql, $params);
-      $row = $sth->fetch(PDO::FETCH_ASSOC);
-      if($row!==FALSE){
-        $adherent = new Utilisateur($row);
-      } else {
-        $adherent = new Utilisateur();
-      }
-      return $adherent;
-    }
 }
-
-

@@ -6,15 +6,18 @@ $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
+$statutDAO = new StatutDAO();
+
+$statuts = $statutDAO->findAllStatut();
+$StatutAttente = $statutDAO->findByLibelle('En attente');
 $Motifs = $motifDAO->findAll();
 
-// echo '<p>'.$_SESSION['typeUser'].'</p>';
-
+$userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
-  $userConnecte = $responsableDAO->find($_SESSION['idUser']);
-  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
+  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
 }
-// echo '<p>'.$bordereauEnCours->get_ID_bordereau().'</p>';
+echo $bordereauEnCours->get_Id_statut();
+echo '<p>'.$_SESSION['idUser'].'</p>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,11 +48,13 @@ if($_SESSION['typeUser']==1){
       <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_profil.php'; ?></div>
 
       <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
+        <?php if($bordereauEnCours->get_Id_statut()=='???' && $_SESSION['typeUser']==1){ ?>
         <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_creation_bordereau')">
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_creation_bordereau')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
         </div>
+      <?php } ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
@@ -83,8 +88,8 @@ if($_SESSION['typeUser']==1){
     }
     if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
       ?>
-      <div class="dialog" id="W_acceder_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
-      <div class="dialog" id="W_afficher_justificatif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
+      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
+      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Tresorier">
@@ -98,33 +103,31 @@ if($_SESSION['typeUser']==1){
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_afficher_justificatif')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_justificatif')">Afficher justificatif</span>
           </div>
-          <!-- ouvre le dialog pour se déconnecter -->
-          <a href="logout.php">
-            <div data-role="tile" class="bg-indigo fg-white">
-                <span class="mif-github icon"></span>
-                <span class="branding-bar">Déconnexion</span>
-            </div>
-          </a>
+          <!-- ouvre le dialog pour creer un bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
+          </div>
         </div>
       </div>
       <?php
     }
 
     if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
-      // echo '<p>'.$_SESSION['typeUser'].'</p>';
       ?>
-
-      <div class="dialog" id="W_affilier_club" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/affilier_club.php'; ?></div>
-      <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/add_tarif_kilometrique'; ?></div>
-      <div class="dialog" id="W_add_motif_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_motif_frais.php'; ?></div>
-
+      <div class="dialog" id="W_gestion_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto">
+        <button class=" button alert drop-shadow" onclick="Metro.dialog.open('#w_NDF_Refusmana');Metro.dialog.close('#W_NDF_Affmana')" ><span class="mif-cross icon"> Refuser </span></button>
+        <?php include 'form/gestion_bordereau.php'; ?>
+      </div>
+      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php// include 'form/add_tarif_kilometrique'; ?></div>
+      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php// include 'form/add_motif_frais.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
           <!-- ouvre le dialog pour affilier un club -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_affilier_club')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_affilier_club')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_affilier_club')">Affilier un club</span>
+          <div data-role="tile" class="bg-indigo fg-white">
+            <a href="gestion_bordereau.php" style="color: black"><span> Gestion des Bordereau </span>
+            </a>
           </div>
           <!-- ouvre le dialog pour ajouter un tarif kilométrique -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">
@@ -136,13 +139,11 @@ if($_SESSION['typeUser']==1){
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_motif_frais')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_add_motif_frais')">Motif de frais</span>
           </div>
-          <!-- ouvre le dialog pour se déconnecter -->
-          <a href="logout.php">
-            <div data-role="tile" class="bg-indigo fg-white">
-                <span class="mif-github icon"></span>
-                <span class="branding-bar">Déconnexion</span>
-            </div>
-          </a>
+          <!-- ouvre le dialog pour creer un bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
+          </div>
         </div>
       </div>
       <?php
@@ -153,23 +154,28 @@ if($_SESSION['typeUser']==1){
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
   <script>
-  function invalidForm(){
-    var form  = $(this);
-    form.addClass("ani-ring");
-    setTimeout(function(){
-      form.removeClass("ani-ring");
-    }, 1000);
-  }
-  function validateForm(){
-    $(".login-form").animate({
-      opacity: 0
-    });
-  }
+    function invalidForm(){
+      var form  = $(this);
+      form.addClass("ani-ring");
+      setTimeout(function(){
+        form.removeClass("ani-ring");
+      }, 1000);
+    }
+    function validateForm(){
+      $(".login-form").animate({
+        opacity: 0
+      });
+    }
   </script>
   <script language="javascript" type="text/javascript">
-  function redirection(test_form) {
-    document.getElementById(test_form).submit();
-  }
-</script>
+    function redirection(test_form) {
+      document.getElementById(test_form).submit();
+    }
+  </script>
+  <script language="javascript" type="text/javascript">
+    function opendialog(dialog) {
+      document.getElementById(dialog).Metro.dialog.open();
+    }
+  </script>
 </body>
 </html>

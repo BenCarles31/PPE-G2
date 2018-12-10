@@ -15,9 +15,10 @@ Class BordereauDAO extends DAO{
     return $bordereau;
   }
 
-  function findBordByIdUser($idResponsable){
-    $sql = "select * from bordereau where id_user=:id";
-    $params = array(":id" => $idResponsable);
+  function findBordByIdUser($idResponsable,$idStatut){
+    $sql = "select * from bordereau where id_user=:id and id_statut =:statut";
+    $params = array(":id" => $idResponsable,
+                    ":statut" => $idStatut);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
     if ($row !==FALSE) {
@@ -27,6 +28,18 @@ Class BordereauDAO extends DAO{
     }
     // Retourne l'objet métier
     return $bordereau;
+  }
+
+  function findAllBord(){
+    $sql = "select * from bordereau";
+    $sth = $this->executer($sql);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new Bordereau($row);
+    }
+    // Retourne un tableau d\'objet métier
+    return $tableau;
   }
 
   function findLigneFrais($idBordereau){
@@ -81,6 +94,17 @@ Class BordereauDAO extends DAO{
 
   }
 
+  function updateStatutBordereau($statut,$bordereau){
+    $sql="update `bordereau` SET  `id_statut`=:statut
+                             WHERE ID_bordereau=:bordereau";
+    $params = array(':statut'=>$statut,
+                    ':bordereau'=>$bordereau);
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+
+  }
+
   function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau){
     $nb=null;
     $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau);";
@@ -109,15 +133,17 @@ Class BordereauDAO extends DAO{
 
   }
 
-  function creation_bordereau($date,$id_user,$user_type) {
+  function creation_bordereau($date,$id_user,$user_type,$date1,$statut) {
   $nb = null;
+  $date = date();
   //vérifie le type de l'utilisateur
   if($user_type == 1){
-    $sql = "insert into bordereau values ('',:date,:id_user);";
+    $sql = "insert into bordereau values ('',:date,:id_user,':date',':statut');";
     $params = array(
       ':date'=>$date,
-      ':id_user'=>$id_user
-    );
+      ':id_user'=>$id_user,
+      ':date'=>$date1,
+      ':statut'=>$statut);
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();
   }
