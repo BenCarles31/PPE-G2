@@ -3,3 +3,10 @@
 
 #Documentation
 /Documentation/**
+
+
+#fpdf
+/lib/fpdf/**
+
+#img
+/img/**
