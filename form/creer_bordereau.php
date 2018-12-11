@@ -1,7 +1,8 @@
 <?php
 $valid_creation_bordereau = isset($_POST['valid_creation_bordereau']) ? $_POST['valid_creation_bordereau'] : '0';
 if($valid_creation_bordereau==1){
-  $bord_encours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
+  $date = date('Y');
+  $bord_encours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut(),$date);
   $nb_bord=0;
   foreach($bord_encours as $bord_encour){
     $nb_bord++;

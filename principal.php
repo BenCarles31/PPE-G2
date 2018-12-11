@@ -14,10 +14,10 @@ $Motifs = $motifDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
-  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
+  $date = date('Y-m-d');
+  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut(),$date);
 }
-echo $bordereauEnCours->get_Id_statut();
-echo '<p>'.$_SESSION['idUser'].'</p>';
+
 ?>
 <!DOCTYPE html>
 <html>

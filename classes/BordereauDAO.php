@@ -15,10 +15,11 @@ Class BordereauDAO extends DAO{
     return $bordereau;
   }
 
-  function findBordByIdUser($idResponsable,$idStatut){
-    $sql = "select * from bordereau where id_user=:id and id_statut =:statut";
+  function findBordByIdUser($idResponsable,$idStatut,$date){
+    $sql = "select * from bordereau where id_user=:id and id_statut =:statut and YEAR(date_bordereau) =:date";
     $params = array(":id" => $idResponsable,
-                    ":statut" => $idStatut);
+                    ":statut" => $idStatut,
+                    ":date" => $date);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
     if ($row !==FALSE) {
@@ -92,6 +93,15 @@ Class BordereauDAO extends DAO{
     $nb = $sth->rowcount();
     return $nb; // Retourne le nombre de mise à jour
 
+  }
+
+  function findDateBordereau($idBordereau){
+    $sql = "select YEAR(date_bordereau) from bordereau where ID_bordereau=:idBord";
+    $params = array(":idBord" => $idBordereau);
+    $sth = $this->executer($sql, $params);
+    $row = $sth->fetch(PDO::FETCH_ASSOC);
+    $dateBord = $row['YEAR(date_bordereau)'];
+    return $dateBord;
   }
 
   function updateStatutBordereau($statut,$bordereau){

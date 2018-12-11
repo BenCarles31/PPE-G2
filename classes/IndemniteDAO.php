@@ -12,5 +12,5 @@ Class IndemniteDAO extends DAO {
     // Retourne un tableau d\'objet métier
     return $tableau;
   }
-
+  
 }

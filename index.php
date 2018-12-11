@@ -39,13 +39,11 @@ $generalDAO = new GeneralDAO();
                 <span class="branding-bar" onclick="Metro.dialog.open('#W_login_adherent')">Connexion</span>
             </div>
             <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_mdplost')">
-                        <span class="mif-github icon" onclick="Metro.dialog.open('#W_mdplost')"></span>
-                        <span class="branding-bar" onclick="Metro.dialog.open('#W_mdplost')">Mots de passe oublier</span>
+                <span class="mif-github icon" onclick="Metro.dialog.open('#W_mdplost')"></span>
+                <span class="branding-bar" onclick="Metro.dialog.open('#W_mdplost')">Mots de passe oublier</span>
             </div>
         </div>
     </div>
-
-
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
