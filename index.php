@@ -24,6 +24,7 @@ $generalDAO = new GeneralDAO();
     <div class="dialog" id="W_login_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/login.php'; ?></div>
     <div class="dialog" id="W_mdplost" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/mdplost.php'; ?></div>
     <div class="dialog" id="W_register" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/register.php'; ?></div>
+    <div class="dialog" id="W_cerfa" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/pdf.php'; ?></div>
 
 
     <div class="tiles-area">
@@ -42,6 +43,12 @@ $generalDAO = new GeneralDAO();
                 <span class="mif-github icon" onclick="Metro.dialog.open('#W_mdplost')"></span>
                 <span class="branding-bar" onclick="Metro.dialog.open('#W_mdplost')">Mots de passe oublier</span>
             </div>
+	      <a href='form/pdf.php' />
+            <div data-role="tile" class="bg-indigo fg-white" >
+                <span class="mif-github icon" ></span>
+                <span class="branding-bar" >CERFA</span>
+            </div>
+            </a>
         </div>
     </div>
 
