@@ -43,6 +43,19 @@ Class BordereauDAO extends DAO{
     return $tableau;
   }
 
+  function findAllBordByUser($idUser){
+    $sql = "select * from bordereau where id_user =:user";
+    $params = array(":user" => $idUser);
+    $sth = $this->executer($sql,$params);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new Bordereau($row);
+    }
+    // Retourne un tableau d\'objet métier
+    return $tableau;
+  }
+
   function findLigneFrais($idBordereau){
     $sql = "select * from ligne_frais where ID_bordereau=:idBordereau";
     $params = array(":idBordereau" => $idBordereau);

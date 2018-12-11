@@ -7,6 +7,7 @@ $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
 $statutDAO = new StatutDAO();
+$clubDAO = new ClubDAO();
 
 $statuts = $statutDAO->findAllStatut();
 $StatutAttente = $statutDAO->findByLibelle('En attente');

@@ -1,7 +1,7 @@
 <?php
 
 $anneeRef = date('Y');
-$LesBordereaux = $bordereauDAO->findAllBord();
+$LesBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
 $Indemnites = $indemniteDAO->findAll();
 
 foreach($LesBordereaux as $bordereau){

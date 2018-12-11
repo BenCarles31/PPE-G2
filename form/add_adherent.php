@@ -1,6 +1,6 @@
 <?php
   //recuperation des club dans la base pour la liste deroulante (pb 2 entrees BDD DAO, fonc)
-   $clubs = $generalDAO->findAllClub();
+   $clubs = $clubDAO->findAllClub();
 
   //recup formulaire inscription
   $valid_ajout_adherent = isset($_POST['valid_ajout_adherent']) ? $_POST['valid_ajout_adherent'] : '0';
@@ -56,7 +56,7 @@
               <?php
                  //affiche le res de la requete select tout les club dans liste deroulante
                  foreach($clubs as $club){
-                   echo('<option value="'.$club['ID_club'].'">'.$club['nom_club'].'</option>');
+                   echo('<option value="'.$club->get_ID_club().'">'.$club->get_Nom_club().'</option>');
                  }
               ?>
             	</select>

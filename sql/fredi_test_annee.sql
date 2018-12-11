@@ -66,11 +66,9 @@ CREATE TABLE IF NOT EXISTS `bordereau` (
   `ID_bordereau` int(11) NOT NULL AUTO_INCREMENT,
   `date_bordereau` date NOT NULL,
   `id_user` int(11) NOT NULL,
-  `annee` date NOT NULL,
   `id_statut` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ID_bordereau`),
   KEY `Bordereau_utilisateur_FK` (`id_user`),
-  KEY `Bordereau_Indemnite0_FK` (`annee`),
   KEY `Bordereau_statut1_FK` (`id_statut`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -78,9 +76,9 @@ CREATE TABLE IF NOT EXISTS `bordereau` (
 -- Déchargement des données de la table `bordereau`
 --
 
-INSERT INTO `bordereau` (`ID_bordereau`, `date_bordereau`, `id_user`, `annee`, `id_statut`) VALUES
-(5, '2018-11-05', 1, '0000-00-00', 1),
-(6, '2018-10-12', 7, '0000-00-00', 1);
+INSERT INTO `bordereau` (`ID_bordereau`, `date_bordereau`, `id_user`, `id_statut`) VALUES
+(5, '2018-11-05', 1, 1),
+(6, '2018-10-12', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -291,7 +289,6 @@ ALTER TABLE `adherent`
 -- Contraintes pour la table `bordereau`
 --
 ALTER TABLE `bordereau`
-  ADD CONSTRAINT `Bordereau_Indemnite0_FK` FOREIGN KEY (`annee`) REFERENCES `indemnite` (`annee`),
   ADD CONSTRAINT `Bordereau_statut1_FK` FOREIGN KEY (`id_statut`) REFERENCES `statut` (`id_statut`),
   ADD CONSTRAINT `Bordereau_utilisateur_FK` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
