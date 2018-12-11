@@ -90,7 +90,7 @@ INSERT INTO `motif` (`idMotif`, `libelle`) VALUES
 
 INSERT INTO `statut` (`id_statut`, `libelle`) VALUES
 (1, 'En attente'),
-(2, 'Cloturer')
+(2, 'Cloturer'),
 (2, 'Valider');
 
 -- --------------------------------------------------------
