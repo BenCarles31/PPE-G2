@@ -4,9 +4,18 @@ $ligne_a_suppr = isset($_POST['ligne_supprimer']) ? $_POST['ligne_supprimer'] : 
 
 if($valid_suppr_ligne_bordereau){
   $bordereauDAO->deleteLigne($ligne_a_suppr);
+  header('Location: principal.php');
+}
+
+$validByresp = isset($_POST['validerByResp']) ? $_POST['validerByResp'] : '0';
+
+if($validByresp !=0){
+  $bordereauDAO->updateStatutBordereau($StatutValider->get_Id_statut(),$bordereauEnCours->get_ID_bordereau());
+  header('Location: principal.php');
 }
 
 $Indemnites = $indemniteDAO->findAll();
+
 $LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
 
 $cout_km=0;
@@ -58,5 +67,8 @@ $total_bord =0;
         echo'</tr>';
   }
 echo '</table>';
-echo '<p> Total : '.$total_bord.'</p>';
+echo '<p> Total : '.$total_bord.'</p><br/>';
+echo ('<form action="#" method="POST">
+        <p><button id="test_form" name="validerByResp" value="1" class="button success">Valider le bordereau</button></p><br/>
+      </form>');
 ?>

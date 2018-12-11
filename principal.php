@@ -11,12 +11,13 @@ $clubDAO = new ClubDAO();
 
 $statuts = $statutDAO->findAllStatut();
 $StatutAttente = $statutDAO->findByLibelle('En attente');
+$StatutValider = $statutDAO->findByLibelle('Valider');
 $Motifs = $motifDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
-  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut(),$date);
+  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
 }
 ?>
 <!DOCTYPE html>

@@ -15,11 +15,10 @@ Class BordereauDAO extends DAO{
     return $bordereau;
   }
 
-  function findBordByIdUser($idResponsable,$idStatut,$date){
-    $sql = "select * from bordereau where id_user=:id and id_statut =:statut and YEAR(date_bordereau) =:date";
+  function findBordByIdUser($idResponsable,$idStatut){
+    $sql = "select * from bordereau where id_user=:id and id_statut =:statut";
     $params = array(":id" => $idResponsable,
-                    ":statut" => $idStatut,
-                    ":date" => $date);
+                    ":statut" => $idStatut);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
     if ($row !==FALSE) {

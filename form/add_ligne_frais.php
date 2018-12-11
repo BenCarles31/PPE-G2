@@ -3,13 +3,20 @@
 $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
 $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
 $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
-$trajet = isset($_POST['trajet']) ? $_POST['trajet'] : 'null';
-$km = isset($_POST['KM']) ? $_POST['KM'] : 'null';
+$trajet = isset($_POST['trajet']) ? $_POST['trajet'] : '???';
+$km = isset($_POST['KM']) ? $_POST['KM'] : '???';
 $peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
 $repas = isset($_POST['repas']) ? $_POST['repas'] : 'null';
 $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 
 if($valid_ajout_ligne_bordereau==1){
+
+  if($trajet = '???'){
+    $trajet = 'aucun';
+    $km = '0';
+    $peages = '0';
+  }
+
   $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
   header('Location: principal.php');
 }

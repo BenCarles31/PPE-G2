@@ -7,6 +7,8 @@ $bordereauDAO = new BordereauDAO();
 $statutDAO = new StatutDAO();
 
 $StatutCloturer= $statutDAO->findByLibelle('Cloturer');
+$StatutValider = $statutDAO->findByLibelle('Valider');
+
 $cloturerBordereau = isset($_POST['validBordereau']) ? $_POST['validBordereau'] : '';
 $idBordereau = isset($_POST['idBordereau']) ? $_POST['idBordereau'] : '';
 
@@ -47,7 +49,7 @@ echo('<thead><tr>
      </tr></thead>');
 
 foreach($lesBordereaux as $Bordereau){
-  if($Bordereau->get_Id_statut()!=$StatutCloturer->get_Id_statut()){
+  if($Bordereau->get_Id_statut()==$StatutValider->get_Id_statut()){
   $resp_by_bord = $responsableDAO->findRespByIdBordeau($Bordereau->get_ID_bordereau());
   echo("<tr style='color: black'>");
    echo '<td>'.$resp_by_bord->get_nom().'</td>';

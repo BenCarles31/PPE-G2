@@ -6,11 +6,15 @@ $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
+$statutDAO = new StatutDAO();
 $Motifs = $motifDAO->findAll();
+
+
+$StatutAttente = $statutDAO->findByLibelle('En attente');
 
 if($_SESSION['typeUser']==1){
   $userConnecte = $responsableDAO->find($_SESSION['idUser']);
-  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user());
+  $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
 }
 
 if (isset($_GET['idLigne'])) {
