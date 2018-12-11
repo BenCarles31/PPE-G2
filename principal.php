@@ -18,7 +18,6 @@ if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut(),$date);
 }
-
 ?>
 <!DOCTYPE html>
 <html>

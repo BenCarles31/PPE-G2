@@ -1,5 +1,4 @@
 <?php
-
 $valid_suppr_ligne_bordereau = isset($_POST['val_suppr']) ? $_POST['val_suppr'] : '';
 $ligne_a_suppr = isset($_POST['ligne_supprimer']) ? $_POST['ligne_supprimer'] : '';
 

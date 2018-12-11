@@ -8,9 +8,9 @@ foreach($LesBordereaux as $bordereau){
   $cout_km=0;
   $total_bord=0;
   $dateBord = $bordereauDAO->findDateBordereau($bordereau->get_ID_bordereau());
-  $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
 
   if($dateBord < $anneeRef){
+    $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
     echo '<table class="table striped table-border">';
     //entete du tableau
     echo('<thead><tr>
@@ -54,5 +54,4 @@ foreach($LesBordereaux as $bordereau){
   echo '<p> Total : '.$total_bord.'</p>';
   }
 }
-
 ?>
