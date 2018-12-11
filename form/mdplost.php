@@ -25,7 +25,6 @@ echo ($mail2);  //affichage test
 
 
 <?php
-
 }
   if($mail==$verif_bdd->get_email()){
   ?>
