@@ -27,10 +27,23 @@ Class AdherentDAO extends DAO {
     return $tableau;
   }
 
+  function findAllAdherentbyResp($idResp){
+    $sql = "select * from adherent where id_user = :idResp";
+    $params = array(":idResp" => $idResp);
+    $sth = $this->executer($sql,$params);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new Adherent($row);
+    }
+    // Retourne un tableau d\'objet métier
+    return $tableau;
+  }
 
-    function findClubbyAdherent($idAdherent){
-      $sql = "select * from club where num_license = (select u.id_user from utilisateur u, bordereau b where b.id_user = u.id_user and ID_bordereau=:idBordereau)";
-      $params = array(":idBordereau" => $idBordereau);
+
+    function findlibClubbyAdherent($idAdherent){
+      $sql = "Select nom_club from club c, adherent a where a.ID_club = c.ID_club and a.num_license = :idAdherent";
+      $params = array(":idAdherent" => $idAdherent);
       $sth = $this->executer($sql, $params);
       $row = $sth->fetch(PDO::FETCH_ASSOC);
       if ($row !==FALSE) {
