@@ -1,5 +1,4 @@
 <?php
-
 //
 // Initialisations dans chaque page
 //

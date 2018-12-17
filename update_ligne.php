@@ -43,7 +43,6 @@ if($valid_modif_ligne_bordereau==1){
 
   header('Location: principal.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html>

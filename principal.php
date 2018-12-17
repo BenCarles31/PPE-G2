@@ -11,6 +11,7 @@ $clubDAO = new ClubDAO();
 
 $statuts = $statutDAO->findAllStatut();
 $StatutAttente = $statutDAO->findByLibelle('En attente');
+$StatutCloturer= $statutDAO->findByLibelle('Cloturer');
 $StatutValider = $statutDAO->findByLibelle('Valider');
 $Motifs = $motifDAO->findAll();
 

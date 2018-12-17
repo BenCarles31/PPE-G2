@@ -11,11 +11,11 @@ $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 
 if($valid_ajout_ligne_bordereau==1){
 
-  if($trajet = '???'){
+  /*if($trajet = '???'){
     $trajet = 'aucun';
     $km = '0';
     $peages = '0';
-  }
+  }*/
 
   $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
   header('Location: principal.php');

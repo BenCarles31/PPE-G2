@@ -8,7 +8,7 @@ foreach($LesBordereaux as $bordereau){
   $total_bord=0;
   $dateBord = $bordereauDAO->findDateBordereau($bordereau->get_ID_bordereau());
 
-  if($dateBord < $anneeRef){
+  if($bordereau->get_Id_statut() < $anneeRef){
     $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
     echo '<table class="table striped table-border">';
     //entete du tableau
