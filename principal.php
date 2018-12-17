@@ -14,6 +14,7 @@ $StatutAttente = $statutDAO->findByLibelle('En attente');
 $StatutCloturer= $statutDAO->findByLibelle('Cloturer');
 $StatutValider = $statutDAO->findByLibelle('Valider');
 $Motifs = $motifDAO->findAll();
+$Indemnites = $indemniteDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
@@ -57,21 +58,27 @@ if($_SESSION['typeUser']==1){
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_creation_bordereau')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
         </div>
-      <?php } ?>
+      <?php
+        }
+        if($bordereauEnCours->get_Id_statut()!=='???' && $_SESSION['typeUser']==1){
+      ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
         </div>
-        <!-- ouvre le dialog pour afficher le bordereau -->
-        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
-          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
-          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
-        </div>
         <!-- ouvre le dialog pour ajouter une ligne de frais -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
+        </div>
+      <?php
+        }
+      ?>
+        <!-- ouvre le dialog pour afficher le bordereau -->
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
         </div>
         <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
@@ -93,8 +100,8 @@ if($_SESSION['typeUser']==1){
 
       </div>
       <?php
-    }
-    if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
+        }
+        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
       ?>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
@@ -126,17 +133,12 @@ if($_SESSION['typeUser']==1){
         </div>
       </div>
       <?php
-    }
-
-    if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
+        }
+        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
       ?>
-      <div class="dialog" id="W_gestion_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto">
-        <button class=" button alert drop-shadow" onclick="Metro.dialog.open('#w_NDF_Refusmana');Metro.dialog.close('#W_NDF_Affmana')" ><span class="mif-cross icon"> Refuser </span></button>
-        <?php include 'form/gestion_bordereau.php'; ?>
-      </div>
+      <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif.php' ?></div>
       <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_tarif_kilometrique.php'; ?></div>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php// include 'form/add_motif_frais.php'; ?></div>
-
+      
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
           <!-- ouvre le dialog pour affilier un club -->
@@ -150,9 +152,9 @@ if($_SESSION['typeUser']==1){
             <span class="branding-bar" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">Tarif kilométrique</span>
           </div>
           <!-- ouvre le dialog pour ajouter un motif de frais -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_motif_frais')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_motif_frais')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_add_motif_frais')">Motif de frais</span>
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_motif')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_motif')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
           </div>
           <!-- ouvre le dialog pour creer un bordereau -->
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
@@ -169,8 +171,8 @@ if($_SESSION['typeUser']==1){
         </div>
       </div>
       <?php
-    }
-    ?>
+        }
+      ?>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

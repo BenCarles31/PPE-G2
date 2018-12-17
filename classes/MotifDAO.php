@@ -27,4 +27,23 @@ Class MotifDAO extends DAO {
     return $motif;
   }
 
+  function addMotif($libelle){
+    $nb=null;
+    $sql = "insert into motif values ('',:libelle);";
+    $params = array(':libelle'=>$libelle);
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+  }
+
+  function updateMotif($libelle,$idMotif){
+    $sql="update `motif` SET  `libelle`=:libelle_motif
+                         WHERE idMotif=:id_motif";
+    $params = array(':libelle_motif'=>$libelle,
+                    ':id_motif'=>$idMotif);
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+  }
+
 }
