@@ -18,6 +18,7 @@ if($validByresp !=0){
 $Indemnites = $indemniteDAO->findAll();
 
 $LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
+$anneeBordereau = $bordereauDAO->findDateBordereau($bordereauEnCours->get_ID_bordereau());
 
 $cout_km=0;
 $total_bord =0;
@@ -49,9 +50,9 @@ $total_bord =0;
             echo("<td>".$Motif->get_Libelle()."</td>");
           }
         }
-        //rajouter condition sur les annees à la place de 1
+        
         foreach($Indemnites as $indemnite){
-          if($indemnite->get_Tarif_kilometrique() ==1){
+          if($indemnite->get_Annee() == $anneeBordereau){
             $cout_km = $LigneFrais->get_KM() * $indemnite->get_Tarif_kilometrique();
           }
         }

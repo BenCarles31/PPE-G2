@@ -12,5 +12,19 @@ Class IndemniteDAO extends DAO {
     // Retourne un tableau d\'objet métier
     return $tableau;
   }
-  
+
+  function findDateIndemnite($anne){
+    $sql = "select * from indemnite where annee=:idannee";
+    $params = array(":idannee" => $anne);
+    $sth = $this->executer($sql, $params);
+    $row = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+      $indemnite = new Indemnite($row);
+    } else {
+      $indemnite = new Indemnite();
+    }
+    // Retourne l'objet métier
+    return $indemnite;
+  }
+
 }

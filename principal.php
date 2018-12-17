@@ -57,21 +57,27 @@ if($_SESSION['typeUser']==1){
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_creation_bordereau')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_creation_bordereau')">Creation bordereau</span>
         </div>
-      <?php } ?>
+      <?php
+        }
+        if($bordereauEnCours->get_Id_statut()!=='???' && $_SESSION['typeUser']==1){
+      ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_bordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_bordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_bordereau')">afficher Bordereau</span>
         </div>
-        <!-- ouvre le dialog pour afficher le bordereau -->
-        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
-          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
-          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
-        </div>
         <!-- ouvre le dialog pour ajouter une ligne de frais -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_ajout_ligne_frais')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
+        </div>
+      <?php
+        }
+      ?>
+        <!-- ouvre le dialog pour afficher le bordereau -->
+        <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
+          <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
+          <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
         </div>
         <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
@@ -93,8 +99,8 @@ if($_SESSION['typeUser']==1){
 
       </div>
       <?php
-    }
-    if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
+        }
+        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
       ?>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
@@ -126,15 +132,14 @@ if($_SESSION['typeUser']==1){
         </div>
       </div>
       <?php
-    }
-
-    if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
+        }
+        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
       ?>
       <div class="dialog" id="W_gestion_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto">
         <button class=" button alert drop-shadow" onclick="Metro.dialog.open('#w_NDF_Refusmana');Metro.dialog.close('#W_NDF_Affmana')" ><span class="mif-cross icon"> Refuser </span></button>
         <?php include 'form/gestion_bordereau.php'; ?>
       </div>
-      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php// include 'form/add_tarif_kilometrique'; ?></div>
+      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif'; ?></div>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php// include 'form/add_motif_frais.php'; ?></div>
 
       <div class="tiles-area">
@@ -169,8 +174,8 @@ if($_SESSION['typeUser']==1){
         </div>
       </div>
       <?php
-    }
-    ?>
+        }
+      ?>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
