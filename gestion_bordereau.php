@@ -8,14 +8,13 @@ $statutDAO = new StatutDAO();
 
 $StatutCloturer= $statutDAO->findByLibelle('Cloturer');
 $StatutValider = $statutDAO->findByLibelle('Valider');
-$StatutEnCours = $statutDAO->findByLibelle('En attente');
 
 $cloturerBordereau = isset($_POST['validBordereau']) ? $_POST['validBordereau'] : '';
 $idBordereau = isset($_POST['idBordereau']) ? $_POST['idBordereau'] : '';
 
 if($cloturerBordereau){
   $bordereauDAO->updateStatutBordereau($StatutCloturer->get_Id_statut(),$idBordereau);
-  header('Location: principal.php');
+  redirige('principal.php');
 }
 ?>
 <!DOCTYPE html>
@@ -38,11 +37,7 @@ if($cloturerBordereau){
 <?php
 $lesBordereaux = $bordereauDAO->findAllBord();
 
-
-// Tableau de bordereau a cloturer
-
 echo '<table class="table bg-white striped table-border">';
-echo '<caption>Bordereaux Validés à Cloturer</caption>';
 //entete du tableau
 echo('<thead><tr>
         <th>Nom</th>
@@ -70,61 +65,8 @@ foreach($lesBordereaux as $Bordereau){
  }
 }
 echo '</table>';
-
-
-// Tableau de bordereau en cours
-
-
-echo '<table class="table bg-white striped table-border">';
-echo '<caption>Bordereaux en cours</caption>';
-//entete du tableau
-echo('<thead><tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Date</th>
-        <th>Détails</th>
-     </tr></thead>');
-foreach($lesBordereaux as $Bordereau){
-  if($Bordereau->get_Id_statut()==$StatutEnCours->get_Id_statut()){
-  $resp_by_bord = $responsableDAO->findRespByIdBordeau($Bordereau->get_ID_bordereau());
-  echo("<tr style='color: black'>");
-   echo '<td>'.$resp_by_bord->get_nom().'</td>';
-   echo '<td>'.$resp_by_bord->get_prenom().'</td>';
-   echo '<td>'.$Bordereau->get_Date_bordereau().'</td>';
-   echo '<td><a href="affichage_details_bordereau.php?idBorddereau='.$Bordereau->get_ID_bordereau().'">Détails</a></td>';
-   echo "</tr>";
- }
-}
-echo '</table>';
-
-
-// Tableau de bordereaux Cloturés
-
-echo '<table class="table bg-white striped table-border">';
-echo '<caption>Bordereaux Cloturés</caption>';
-//entete du tableau
-echo('<thead><tr>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Date</th>
-        <th>Détails</th>
-     </tr></thead>');
-foreach($lesBordereaux as $Bordereau){
-  if($Bordereau->get_Id_statut()==$StatutCloturer->get_Id_statut()){
-  $resp_by_bord = $responsableDAO->findRespByIdBordeau($Bordereau->get_ID_bordereau());
-  echo("<tr style='color: black'>");
-   echo '<td>'.$resp_by_bord->get_nom().'</td>';
-   echo '<td>'.$resp_by_bord->get_prenom().'</td>';
-   echo '<td>'.$Bordereau->get_Date_bordereau().'</td>';
-   echo '<td><a href="affichage_details_bordereau.php?idBorddereau='.$Bordereau->get_ID_bordereau().'">Détails</a></td>';
-   echo "</tr>";
- }
-}
-echo '</table>';
 echo '<p><a href="principal.php">Retour</a> à l\'accueil</p>';
 ?>
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
 <script>
