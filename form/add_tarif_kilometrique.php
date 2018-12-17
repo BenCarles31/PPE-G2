@@ -26,6 +26,6 @@ if($valid_ajout_tarif==1){
             <input type="text" name="tarif" data-prepend="<span class='mif-envelop'>" placeholder="saisir prix par kilometre">
         </div>
         <div class="form-group">
-        <button id="test_form" name="valid_ajout_tarif" value="1" class="button">Ajout d'un tarif pour l'année</button><br/>
+        <button id="test_form" name="valid_ajout_tarif" value="1" class="button success">Ajout d'un tarif pour l'année</button><br/>
         </div>
 </form>
