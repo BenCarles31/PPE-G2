@@ -26,5 +26,15 @@ Class IndemniteDAO extends DAO {
     // Retourne l'objet métier
     return $indemnite;
   }
-
-}
+  
+  function insertTarif($date,$tarif){
+    $sql = "insert into indemnite values (:date,:tarif);";
+    $params = array(
+      ':date'=>$date,
+      ':tarif'=>$tarif
+    );
+    $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+    $nb = $sth->rowcount();
+    return $nb; // Retourne le nombre de mise à jour
+  }
+  }
