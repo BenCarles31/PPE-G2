@@ -18,7 +18,7 @@ if($valid_ajout_ligne_bordereau==1){
   }*/
 
   $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
-  header('Location: principal.php');
+  redirige('principal.php');
 }
 ?>
  <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"

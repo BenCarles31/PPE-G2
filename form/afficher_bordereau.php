@@ -4,14 +4,15 @@ $ligne_a_suppr = isset($_POST['ligne_supprimer']) ? $_POST['ligne_supprimer'] : 
 
 if($valid_suppr_ligne_bordereau){
   $bordereauDAO->deleteLigne($ligne_a_suppr);
-  header('Location: principal.php');
+  //header('Location: principal.php');
+  redirige('principal.php');
 }
 
 $validByresp = isset($_POST['validerByResp']) ? $_POST['validerByResp'] : '0';
 
 if($validByresp !=0){
   $bordereauDAO->updateStatutBordereau($StatutValider->get_Id_statut(),$bordereauEnCours->get_ID_bordereau());
-  header('Location: principal.php');
+  redirige('principal.php');
 }
 
 $Indemnites = $indemniteDAO->findAll();

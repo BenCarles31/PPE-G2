@@ -41,7 +41,7 @@ $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 if($valid_modif_ligne_bordereau==1){
   $bordereauDAO->update($ligneModifier->get_Id_ligne(),$date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif);
 
-  header('Location: principal.php');
+  redirige('principal.php');
 }
 ?>
 <!DOCTYPE html>

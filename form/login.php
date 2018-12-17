@@ -10,9 +10,9 @@ if($validLogin==1){
   if($adherentConnected->get_email()!='???'){
     $_SESSION['idUser'] = $adherentConnected->get_id_user();
     $_SESSION['typeUser'] = $adherentConnected->get_ID_type();
-    header('Location: principal.php');
+    redirige('principal.php');
   }else{
-    header('Location: index.php');
+    redirige('index.php');
   }
 }
 ?>

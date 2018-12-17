@@ -32,3 +32,9 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
  define('DB_PASSWORD','');
  define('DB_HOST','localhost');
  define('DB_NAME','newFredi');
+
+ //fonction redirection (remplace header)
+function redirige($url)
+{
+   die('<meta http-equiv="refresh" content="0;URL='.$url.'">');
+}

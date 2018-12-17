@@ -13,7 +13,7 @@ if($valid_creation_bordereau==1){
   if($nb_bord==0){
     $date_courant = Date('Y-m-d');
     $bordereauDAO->creation_bordereau($date_courant,$userConnecte->get_id_user(),$userConnecte->get_ID_type(),$StatutAttente->get_Id_statut());
-    header('Location: principal.php');
+    redirige('principal.php');
   }else{
     echo '<p>La tuile creation</p>';
   }

@@ -33,7 +33,7 @@ if($update_profil==1){
   if($mdp1='null' && $mdp2='null'){
     $responsableDAO->update($userConnecte->get_id_user(),$nom,$prenom,$rue,$cp,$ville,$email,$userConnecte->get_mdp());
   }
-  header('Location: principal.php');
+  redirige('principal.php');
 }
 ?>
 <!DOCTYPE html>

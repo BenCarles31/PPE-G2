@@ -21,7 +21,7 @@ if($valid_inscription==1){
 
     if(count($verif_dispo)>0){
       $generalDAO->register($nom,$prenom,$mail,$adresse,$cp,$ville,$mdp1,$typeResponsable);
-      header('Location: index.php');
+      redirige('principal.php');
     }
   }
 }
