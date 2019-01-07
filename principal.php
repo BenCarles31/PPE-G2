@@ -101,44 +101,11 @@ if($_SESSION['typeUser']==1){
       </div>
       <?php
         }
-        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==2) {
-      ?>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/acceder_bordereau.php'; ?></div>
-      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_justificatif.php'; ?></div>
-
-      <div class="tiles-area">
-        <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Tresorier">
-          <!-- ouvre le dialog pour acceder au bordereau -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_acceder_bordereau')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_acceder_bordereau')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_acceder_bordereau')">Acceder au bordereau</span>
-          </div>
-          <!-- ouvre le dialog pour afficher justificatif -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_afficher_justificatif')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_afficher_justificatif')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_afficher_justificatif')">Afficher justificatif</span>
-          </div>
-          <!-- ouvre le dialog pour creer un bordereau -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
-          </div>
-
-          <a href="logout.php">
-            <div data-role="tile" class="bg-indigo fg-white">
-                <span class="mif-github icon"></span>
-                <span class="branding-bar">Déconnexion</span>
-            </div>
-          </a>
-        </div>
-      </div>
-      <?php
-        }
-        if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==3) {
+        if($_SESSION['idUser']!=0 && ($_SESSION['typeUser']==3 || $_SESSION['typeUser']==2)) {
       ?>
       <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif.php' ?></div>
       <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_tarif_kilometrique.php'; ?></div>
-      
+
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
           <!-- ouvre le dialog pour affilier un club -->
@@ -155,11 +122,6 @@ if($_SESSION['typeUser']==1){
           <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_motif')">
             <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_motif')"></span>
             <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
-          </div>
-          <!-- ouvre le dialog pour creer un bordereau -->
-          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
-            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
-            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
           </div>
 
           <a href="logout.php">
