@@ -21,8 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `newfredi`
 --
-CREATE DATABASE IF NOT EXISTS `newfredi` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `newfredi`;
+CREATE DATABASE IF NOT EXISTS `testfredi` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE `testfredi`;
 
 -- --------------------------------------------------------
 
