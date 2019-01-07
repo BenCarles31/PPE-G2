@@ -20,6 +20,15 @@ $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
+
+  $ALLBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
+  $bordereauCloturer=0;
+
+  foreach ($ALLBordereaux as $unBordereau){
+    if($unBordereau->get_Id_statut() == $StatutCloturer->get_Id_statut()){
+      $bordereauCloturer++;
+    }
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -74,12 +83,16 @@ if($_SESSION['typeUser']==1){
         </div>
       <?php
         }
+        if($bordereauCloturer>0){
       ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
         </div>
+      <?php
+        }
+      ?>
         <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_adherent')"></span>

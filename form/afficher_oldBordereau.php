@@ -1,5 +1,4 @@
 <?php
-$anneeRef = date('Y');
 $LesBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
 $Indemnites = $indemniteDAO->findAll();
 
@@ -8,7 +7,7 @@ foreach($LesBordereaux as $bordereau){
   $total_bord=0;
   $dateBord = $bordereauDAO->findDateBordereau($bordereau->get_ID_bordereau());
 
-  if($bordereau->get_Id_statut() < $anneeRef){
+  if($bordereau->get_Id_statut() == $StatutCloturer->get_Id_statut()){
     $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
     echo '<table class="table striped table-border">';
     //entete du tableau
