@@ -10,5 +10,5 @@ nom de la base : newfredi
 * mdp : vinzvinz
 
 Par rapport au frameworl METRO4 que nous utilisons : 
- A NOTER IMPORTANT : Chrome 71 : Les tuiles fonctionnent
-                     Sous firefox 64 : l'image sur les tuiles ne fonctionne pas, il faut cliquer en peripherie de la tuile hors du logo 
+ A NOTER IMPORTANT : * Chrome 71 : Les tuiles fonctionnent
+                     * Sous firefox 64 : l'image sur les tuiles ne fonctionne pas, il faut cliquer en peripherie de la tuile hors du logo 
