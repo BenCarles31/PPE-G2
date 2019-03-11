@@ -7,7 +7,10 @@ foreach($LesBordereaux as $bordereau){
   $total_bord=0;
   $dateBord = $bordereauDAO->findDateBordereau($bordereau->get_ID_bordereau());
 
-  if($bordereau->get_Id_statut() == $StatutCloturer->get_Id_statut()){
+  if($bordereau->get_Id_statut() == $StatutCloturer->get_Id_statut() || $bordereau->get_Id_statut() ==  $StatutValider->get_Id_statut()){
+      $lib = $statutDAO->find($bordereau->get_Id_statut())->get_Libelle();
+      echo '<p> Statut du bordereau : '. $lib;
+  
     $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
     echo '<table class="table striped table-border">';
     //entete du tableau
@@ -52,6 +55,8 @@ foreach($LesBordereaux as $bordereau){
       }
   echo '</table>';
   echo '<p> Total : '.$total_bord.'</p>';
+
+  echo '____________________________________________________';
   }
 }
 ?>
