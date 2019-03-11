@@ -1,4 +1,4 @@
-
+USE `newfredi`;
 
 INSERT INTO `indemnite` (`annee`, `tarif_kilometrique`) VALUES
 ('0000-00-00' , 1);
