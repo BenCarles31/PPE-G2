@@ -37,9 +37,9 @@ $total_bord =0;
        </tr></thead>');
        foreach($LignesFrais as $LigneFrais){
          echo("<tr style='color: black'>
-            <td>" .$LigneFrais->get_Date_frais() . "</td>
-            <td>" .$LigneFrais->get_Trajet() . "</td>
-            <td>" .$LigneFrais->get_KM()."</td>
+            <td>".$LigneFrais->get_Date_frais()."</td>
+            <td>".$LigneFrais->get_Trajet()."</td>
+            <td>".$LigneFrais->get_KM()."</td>
             <td>".$LigneFrais->get_Cout_peages()."</td>
             <td>".$LigneFrais->get_Cout_repas()."</td>
             <td>".$LigneFrais->get_Cout_hebergement()."</td>");
@@ -50,9 +50,12 @@ $total_bord =0;
             echo("<td>".$Motif->get_Libelle()."</td>");
           }
         }
-        
+
         foreach($Indemnites as $indemnite){
-          if($indemnite->get_Annee() == $anneeBordereau){
+          $anneeInd = explode("-", $indemnite->get_annee());
+          $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
+
+          if($anneeInd[0] == $anneeBord[0]){
             $cout_km = $LigneFrais->get_KM() * $indemnite->get_Tarif_kilometrique();
           }
         }
