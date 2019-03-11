@@ -19,11 +19,10 @@ if($valid_ajout_tarif==1){
         <hr class="thin mt-4 mb-4 bg-white">
 
         <div class="form-group">
-            <input type="text" name="date" data-prepend="<span class='mif-envelop'>" placeholder="Saisir annee">
+            <input type="text" data-role="calendarpicker" name="date" data-prepend="<span class='mif-envelop'>" placeholder="Saisir année">
         </div>
-
         <div class="form-group">
-            <input type="text" name="tarif" data-prepend="<span class='mif-envelop'>" placeholder="saisir prix par kilometre">
+            <input type="text" name="tarif" data-prepend="<span class='mif-envelop'>" placeholder="Saisir tarif kilométrique">
         </div>
         <div class="form-group">
         <button id="test_form" name="valid_ajout_tarif" value="1" class="button success">Ajout d'un tarif pour l'année</button><br/>
