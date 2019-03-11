@@ -1,8 +1,8 @@
-# Bienvenue sur notre Fredi :laughing::laughing::laughing:
+# Bienvenue sur notre Fredi
 
 nom de la base : newfredi
 
-* User : Vinz@email.com
+* User : vinz@email.com
 * Mdp : vinzvinz
 
 #usercrib
