@@ -6,8 +6,11 @@ foreach($LesBordereaux as $bordereau){
   $cout_km=0;
   $total_bord=0;
   $dateBord = $bordereauDAO->findDateBordereau($bordereau->get_ID_bordereau());
+ 
+  if($bordereau->get_Id_statut() == $StatutCloturer->get_Id_statut() || $bordereau->get_Id_statut() ==  $StatutValider->get_Id_statut()){
+    $lib = $statutDAO->find($bordereau->get_Id_statut())->get_Libelle();
+    echo '<p> Statut du bordereau : '. $lib;
 
-  if($bordereau->get_Id_statut() == $StatutCloturer->get_Id_statut()){
     $LignesFrais = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
     echo '<table class="table striped table-border">';
     //entete du tableau
@@ -44,12 +47,18 @@ foreach($LesBordereaux as $bordereau){
               $cout_km = $LigneFrais->get_KM() * $indemnite->get_Tarif_kilometrique();
             }
           }
-
+          echo'<p>';
         $total_bord = $total_bord + $LigneFrais->get_Cout_peages() + $LigneFrais->get_Cout_repas() + $LigneFrais->get_Cout_hebergement() + $cout_km;
+        echo'</p>';
+      
+
         echo'</tr>';
       }
   echo '</table>';
   echo '<p> Total : '.$total_bord.'</p>';
+  echo '_______________________________________________________';
+
   }
+  
 }
 ?>

@@ -27,7 +27,19 @@ Class StatutDAO extends DAO {
     return $statut;
   }
 
-
+  function find($id_statut){
+    $sql = "select * from statut where id_statut=:id_statut";
+    $params = array(":id_statut" => $id_statut);
+    $sth = $this->executer($sql, $params);
+    $row = $sth->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+      $Statut = new Statut($row);
+    } else {
+      $Statut = new Statut();
+    }
+    // Retourne l'objet métier
+    return $Statut;
+  }
 
 
 
