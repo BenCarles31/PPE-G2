@@ -190,6 +190,11 @@ if($_SESSION['typeUser']==1){
       });
     }
   </script>
+  <script>
+    $(document).ready(function() {
+        $('mon-select2').select2();
+    });
+  </script>
   <script language="javascript" type="text/javascript">
     function redirection(test_form) {
       document.getElementById(test_form).submit();

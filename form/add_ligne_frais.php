@@ -35,7 +35,7 @@ if($valid_ajout_ligne_bordereau==1){
 
              <div class="form-group">
                <label>Motif:</label>
-               <select data-role="select" data-validate="required not=-1" name="motif" size=1>
+               <select data-role="select" class="mon-select2" data-validate="required not=-1" name="motif" size=1>
              	<option value="-1" class="d-none"></option>
                <?php
                   //affiche le res de la requete select tout les club dans liste deroulante

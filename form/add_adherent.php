@@ -51,7 +51,7 @@
 
             <div class="form-group">
               <label>Club:</label>
-              <select data-role="select" data-validate="required not=-1" name="club" size=1>
+              <select data-role="select" class="mon-select2" data-validate="required not=-1" name="club" size=1>
             	<option value="-1" class="d-none"></option>
               <?php
                  //affiche le res de la requete select tout les club dans liste deroulante
@@ -66,8 +66,3 @@
               <button id="test_form" name="valid_ajout_adherent" value="1" class="button">Ajouter un adherent</button><br/>
             </div>
     </form>
-    <script>
-      $(document).ready(function() {
-          $('.js-example-basic-single').select2();
-      });
-    </script>
