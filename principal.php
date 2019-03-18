@@ -36,6 +36,7 @@ if($_SESSION['typeUser']==1){
 <head lang="fr">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
@@ -103,6 +104,14 @@ if($_SESSION['typeUser']==1){
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
+
+        <a href="pdf.php">
+          <div data-role="tile" class="bg-indigo fg-white">
+              <span class="mif-github icon"></span>
+              <span class="branding-bar">Générer PDF</span>
+          </div>
+        </a>
+        &nbsp
         <!-- ouvre le dialog pour se déconnecter -->
         <a href="logout.php">
           <div data-role="tile" class="bg-indigo fg-white">
@@ -166,6 +175,7 @@ if($_SESSION['typeUser']==1){
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script>
     function invalidForm(){
       var form  = $(this);

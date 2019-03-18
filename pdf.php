@@ -38,7 +38,7 @@ class MON_PDF extends FPDF {
         $this->Ln(10);
         $this->Cell(0,0,'code postal : ',0,1,'L');$this->Ln(10);$this->Cell(0,0,'Commune : ',0,1,'L');
         $this->Ln(10);
-        $this->Cell(0,0,'Le benficiaire reconnait avoir recu au titre des versmeents ouvran droit a reduction d impot, la somme de :  ',0,1,'L');
+        $this->Cell(0,0,'Le benficiaire reconnait avoir reçu au titre des versements ouvrant droit à réduction d\'impot, la somme de :  ',0,1,'L');
         $this->Ln(5);
         $this->Cell(0,0,' :  ',0,1,'L');
         $this->Ln(10);

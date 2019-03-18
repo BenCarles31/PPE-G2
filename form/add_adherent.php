@@ -42,7 +42,7 @@
 
             <div class="form-group">
               <label>Sexe:</label>
-            	<select data-role="select" name="sexe" size=3>
+            	<select data-role="select" class="mon-select2" name="sexe" size=3>
               	<option value="1">Masculin</option>
                 <option value="2">Feminin</option>
                 <option value="3">Non-binaire</option>
@@ -66,3 +66,8 @@
               <button id="test_form" name="valid_ajout_adherent" value="1" class="button">Ajouter un adherent</button><br/>
             </div>
     </form>
+    <script>
+      $(document).ready(function() {
+          $('.js-example-basic-single').select2();
+      });
+    </script>
