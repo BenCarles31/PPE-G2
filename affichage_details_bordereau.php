@@ -33,9 +33,9 @@ if (isset($_GET['idBorddereau'])) {
     $idBord= $_GET['idBorddereau'];
 }
 
-$bordereau = $bordereauDAO->find($idBord);
+$bordereauEnCours = $bordereauDAO->find($idBord);
 
-$detailsBordereau = $bordereauDAO->findLigneFrais($bordereau->get_ID_bordereau());
+$detailsBordereau = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
 
 echo '<table class="table bg-white striped table-border">';
 //entete du tableau
@@ -63,9 +63,12 @@ echo('<thead><tr>
           echo("<td>".$Motif->get_Libelle()."</td>");
         }
       }
-      //rajouter condition sur les annees à la place de 1 en dur
+     
       foreach($Indemnites as $indemnite){
-        if($indemnite->get_Tarif_kilometrique() ==1){
+        $anneeInd = explode("-", $indemnite->get_annee());
+        $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
+
+        if($anneeInd[0] == $anneeBord[0]){
           $cout_km = $detailBordereau->get_KM() * $indemnite->get_Tarif_kilometrique();
         }
       }
