@@ -1,7 +1,8 @@
 
 INSERT INTO `indemnite` (`annee`, `tarif_kilometrique`) VALUES
-('2000-01-01' , 1),
-('2002-01-01' , 2),
+('2018-00-00' ,1),
+('2000-01-01' ,1),
+('2002-01-01' ,2),
 ('2019-01-01' ,10);
 
 -- --------------------------------------------------------
@@ -23,8 +24,8 @@ INSERT INTO `ligue` (`ID_ligue`, `nom_ligue`) VALUES
 INSERT INTO `club` (`ID_club`, `nom_club`, `adresse_club`, `cp`, `ville`, `sigle`, `nom_president`, `ID_ligue`) VALUES
 (1, 'Toulouse Football Club' , 'Stadium' , '31200' , 'Toulouse' , 'TFC' , 'Olivier Sadran' , 1),
 (2, 'Olympique Lyonnais' , 'Groupama Stadium' , '69150' , 'Lyon' , 'OL' , 'Jean-Michel Aulas' , 1),
-(3, 'Club Tennis Toulousain' , 'Gymnase de l\'hers' , '31250' , 'Balma' , 'CTT' , 'Jhon Doe' , 6),
-(4, 'Golf Club de l\'Escalet' , 'Golf de l\'Escalet' , '31820' , 'Saint-Pierre' , 'GolfdeL\'Escal' , 'Michel Marchand' , 4),
+(3, 'Club Tennis Toulousain' , "Gymnase de l\'hers" , '31250' , 'Balma' , 'CTT' , 'Jhon Doe' , 6),
+(4, ,"Golf Club de l\'Escalet", "Golf de l\'Escalet" , '31820' , 'Saint-Pierre' , "GolfdeL\'Escal" , 'Michel Marchand' , 4),
 (5, 'Golf Club de labastide' , 'Golf de Labastidet' , '82370' , 'Labastide-Saint-Pierre' , 'GdL' , 'Vincent Estieu' , 4),
 (6, 'Los Angeles Lakers' , 'Staple Center' , '99999' , 'Los Angeles' , 'LAL' , 'Lebron James' , 2),
 (7, 'Cleveland Cavaliers' , 'Quicken Loans Arena' , '99999' , 'Clevland' , 'CC' , 'Lebron Aussi' , 2);
@@ -199,10 +200,3 @@ INSERT INTO `ligne_frais` (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peage
 (9, '2018-12-10' , 'Montauban-Toulouse' , 45, 12.3, 0, 0, 3, 10);
 
 -- --------------------------------------------------------
-
-
-
-
-
-
-

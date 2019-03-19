@@ -51,9 +51,10 @@ $total_bord =0;
           }
         }
 
+        $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
+
         foreach($Indemnites as $indemnite){
           $anneeInd = explode("-", $indemnite->get_annee());
-          $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
 
           if($anneeInd[0] == $anneeBord[0]){
             $cout_km = $LigneFrais->get_KM() * $indemnite->get_Tarif_kilometrique();
