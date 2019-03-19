@@ -1,7 +1,8 @@
-USE `newfredi`;
 
 INSERT INTO `indemnite` (`annee`, `tarif_kilometrique`) VALUES
-('0000-00-00' , 1);
+('2000-01-01' , 1),
+('2002-01-01' , 2),
+('2019-01-01' ,10);
 
 -- --------------------------------------------------------
 
@@ -145,15 +146,15 @@ INSERT INTO `adherent` (`num_license`, `nom`, `prenom`, `sexe`, `date_naissance`
 (1705400437,'ZOECKEL' ,'MATHIEU' ,'M' ,'2000-06-02' ,1,45),
 (1705401018,'ZUEL' ,'STEPHANIE' ,'F' ,'1970-09-25' ,1,46),
 (1705401048,'ZUERO' ,'THOMAS' ,'M' ,'2000-08-14' ,1,47);
+-----------------------------------------------------------
 
 
--- ---------------------------------------------------------
 
 --
 -- Déchargement des données de la table `motif`
 --
 
-INSERT INTO `motif` (`idMotif` , `libelle`) VALUES
+INSERT INTO `motif` (`idMotif`, `libelle`) VALUES
 (1, 'Réunion'),
 (2, 'Compétition régionale'),
 (3, 'Compétition nationale'),
@@ -198,3 +199,10 @@ INSERT INTO `ligne_frais` (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peage
 (9, '2018-12-10' , 'Montauban-Toulouse' , 45, 12.3, 0, 0, 3, 10);
 
 -- --------------------------------------------------------
+
+
+
+
+
+
+

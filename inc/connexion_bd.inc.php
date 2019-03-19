@@ -1,8 +1,8 @@
 <?php
 // Connexion
 $user = 'root';
-$pass = '';
-$host = 'localhost';
+$pass = 'slam2';
+$host = '172.17.5.61';
 $base = 'newfredi';
 $dsn = 'mysql:host='.$host.';dbname='.$base;
 
