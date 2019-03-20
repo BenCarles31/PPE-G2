@@ -17,6 +17,7 @@ $Motifs = $motifDAO->findAll();
 $Indemnites = $indemniteDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
+
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
@@ -51,9 +52,10 @@ if($_SESSION['typeUser']==1){
   <h1 class="start-screen-title">Fredi</h1></br>
 
   <div class="tiles-area">
-    <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1) {
-
-      ?>
+    <!-- vérifie si le statut correspond à crib ou treso -->
+    <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1)
+      {
+    ?>
       <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
@@ -70,6 +72,7 @@ if($_SESSION['typeUser']==1){
         </div>
       <?php
         }
+        //vérifie si le statut de l'utilisateur correspond
         if($bordereauEnCours->get_Id_statut()!=='???' && $_SESSION['typeUser']==1){
       ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
@@ -83,38 +86,17 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
         </div>
       <?php
-          //recup formulaire
+          //recup submit
           $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
 
           if($valid_ajout_ligne_bordereau==1){
-            $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
-            $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
-            $trajet = isset($_POST['trajet']) ? $_POST['trajet'] : '???';
-            $km = isset($_POST['KM']) ? $_POST['KM'] : '???';
-            $peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
-            $repas = isset($_POST['repas']) ? $_POST['repas'] : 'null';
-            $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
-
-            //controle si l'annee de la ligne de frais correspond à l'annee du bordereau
-            $anneeBordControle = explode("-", $bordereauEnCours->get_Date_bordereau());
-            $anneeIndControle = explode("-", $date_frais);
-
-
-            if($anneeBordControle[0]==$anneeIndControle[0]){
-              $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
-              redirige('principal.php');
-            }else{
-              echo ('<div data-role="window" data-title="Window title" data-shadow="true" class="p-2" style="z-index: 100;">
-                         L\'année d\'une ligne de frais doit correspondre à l\'année du bordereau.
-                    </div>');
-
-              //echo ('<span class="d-none" onload="showNotify()"></span>');
-            }
+            include 'form/ControleDateInsertionLigneFrais.php'
           }
         }
+        //affiche les bordereaux Cloturers si il y en a
         if($bordereauCloturer>0){
       ?>
-        <!-- ouvre le dialog pour afficher le bordereau -->
+        <!-- ouvre le dialog pour afficher les anciens bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
@@ -122,17 +104,17 @@ if($_SESSION['typeUser']==1){
       <?php
         }
       ?>
-        <!-- ouvre le dialog pour creer un bordereau -->
+        <!-- ouvre le dialog pour ajouter un Adhérent -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_adherent')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_add_adherent')">Ajouter adhérents</span>
         </div>
-        <!-- ouvre le dialog pour creer un bordereau -->
+        <!-- ouvre le dialog pour gérer le profil -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
-
+          <!-- lien pour gérnérer le PDF à déplacer vers crib/treso -->
         <a href="pdf.php">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
@@ -140,7 +122,7 @@ if($_SESSION['typeUser']==1){
           </div>
         </a>
         &nbsp
-        <!-- ouvre le dialog pour se déconnecter -->
+        <!-- lien pour se déconnecter -->
         <a href="logout.php">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
@@ -151,6 +133,7 @@ if($_SESSION['typeUser']==1){
       </div>
       <?php
         }
+        //vérifie si le statut correspond à crib ou treso
         if($_SESSION['idUser']!=0 && ($_SESSION['typeUser']==3 || $_SESSION['typeUser']==2)) {
       ?>
       <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif.php' ?></div>
@@ -158,7 +141,7 @@ if($_SESSION['typeUser']==1){
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
-          <!-- ouvre le dialog pour affilier un club -->
+          <!-- ouvre le dialog pour gérer les Bordereau -->
           </div>
           <div class="grid">
             <div class="row">
@@ -185,6 +168,7 @@ if($_SESSION['typeUser']==1){
                 <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
               </div>
               &nbsp
+              <!-- lien vers la déconnexion -->
               <a href="logout.php">
                 <div data-role="tile" class="bg-indigo fg-white">
                     <span class="mif-github icon"></span>
