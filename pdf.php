@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include "../init.php";
+include "init.php";
 $clubDAO = new ClubDAO();
 $adherentDAO = new AdherentDAO();
 $responsableDAO = new ResponsableDAO ();
@@ -35,7 +35,7 @@ $datetime = date("Y-m-d");
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 $lesadherents = $adherentDAO->findAllAdherentbyResp($_SESSION['idUser']);
 
-require('../lib/fpdf/fpdf.php');/*erreurs failed to open stream: No such file or directory in D:\xampp\htdocs\projet\PPE-G2-final\form\pdf.php on line 7
+require('lib/fpdf/fpdf.php');/*erreurs failed to open stream: No such file or directory in D:\xampp\htdocs\projet\PPE-G2-final\form\pdf.php on line 7
 */
 /*$clu = $ClubDAO->findAllClub();*/
 class MON_PDF extends FPDF {
@@ -67,9 +67,9 @@ class MON_PDF extends FPDF {
 
     // Création d'une page
     foreach ($lesadherents as $lesadherent){
-      $infoclub = $clubDAO->findclubbyidclub($lesadherent->get_ID_club());
+      $infoclub = $clubDAO->find($lesadherent->get_ID_club());
     $pdf->AddPage();
-    $pdf->Image('../img/cerfa.png',-2,1,-75);
+    $pdf->Image('img/cerfa.png',-2,1,-75);
     $pdf->SetFont('Arial','B',14);
     $pdf->Cell(120,60,$infoclub->get_Nom_club(),'','','L');
     $pdf->ln(1);
