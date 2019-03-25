@@ -17,11 +17,10 @@ $Motifs = $motifDAO->findAll();
 $Indemnites = $indemniteDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
-
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
-
+$_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
   $ALLBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
   $bordereauCloturer=0;
 
@@ -37,7 +36,6 @@ if($_SESSION['typeUser']==1){
 <head lang="fr">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
@@ -52,10 +50,9 @@ if($_SESSION['typeUser']==1){
   <h1 class="start-screen-title">Fredi</h1></br>
 
   <div class="tiles-area">
-    <!-- vérifie si le statut correspond à crib ou treso -->
-    <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1)
-      {
-    ?>
+    <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1) {
+
+      ?>
       <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
       <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
       <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
@@ -72,7 +69,6 @@ if($_SESSION['typeUser']==1){
         </div>
       <?php
         }
-        //vérifie si le statut de l'utilisateur correspond
         if($bordereauEnCours->get_Id_statut()!=='???' && $_SESSION['typeUser']==1){
       ?>
         <!-- ouvre le dialog pour afficher le bordereau -->
@@ -86,17 +82,10 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
         </div>
       <?php
-          //recup submit
-          $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
-
-          if($valid_ajout_ligne_bordereau==1){
-            include 'form/ControleDateInsertionLigneFrais.php'
-          }
         }
-        //affiche les bordereaux Cloturers si il y en a
         if($bordereauCloturer>0){
       ?>
-        <!-- ouvre le dialog pour afficher les anciens bordereau -->
+        <!-- ouvre le dialog pour afficher le bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_aff_oldBordereau')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_aff_oldBordereau')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_aff_oldBordereau')">afficher anciens Bordereau</span>
@@ -104,25 +93,24 @@ if($_SESSION['typeUser']==1){
       <?php
         }
       ?>
-        <!-- ouvre le dialog pour ajouter un Adhérent -->
+        <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_adherent')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_adherent')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_add_adherent')">Ajouter adhérents</span>
         </div>
-        <!-- ouvre le dialog pour gérer le profil -->
+        <!-- ouvre le dialog pour creer un bordereau -->
         <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_profil')">
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
-          <!-- lien pour gérnérer le PDF à déplacer vers crib/treso -->
-        <a href="pdf.php">
-          <div data-role="tile" class="bg-indigo fg-white">
-              <span class="mif-github icon"></span>
-              <span class="branding-bar">Générer PDF</span>
-          </div>
+        <!-- ouvre le dialog pour creer un bordereau -->
+        <a href='form/pdf.php'>
+        <div data-role="tile" class="bg-indigo fg-white">
+          <span class="mif-github icon" ></span>
+          <span class="branding-bar" >Production Pdf</span>
+        </div>
         </a>
-        &nbsp
-        <!-- lien pour se déconnecter -->
+        <!-- ouvre le dialog pour se déconnecter -->
         <a href="logout.php">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
@@ -133,7 +121,6 @@ if($_SESSION['typeUser']==1){
       </div>
       <?php
         }
-        //vérifie si le statut correspond à crib ou treso
         if($_SESSION['idUser']!=0 && ($_SESSION['typeUser']==3 || $_SESSION['typeUser']==2)) {
       ?>
       <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif.php' ?></div>
@@ -141,7 +128,7 @@ if($_SESSION['typeUser']==1){
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
-          <!-- ouvre le dialog pour gérer les Bordereau -->
+          <!-- ouvre le dialog pour affilier un club -->
           </div>
           <div class="grid">
             <div class="row">
@@ -168,7 +155,6 @@ if($_SESSION['typeUser']==1){
                 <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
               </div>
               &nbsp
-              <!-- lien vers la déconnexion -->
               <a href="logout.php">
                 <div data-role="tile" class="bg-indigo fg-white">
                     <span class="mif-github icon"></span>
@@ -187,7 +173,6 @@ if($_SESSION['typeUser']==1){
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script>
     function invalidForm(){
       var form  = $(this);
@@ -201,11 +186,6 @@ if($_SESSION['typeUser']==1){
         opacity: 0
       });
     }
-  </script>
-  <script>
-    $(document).ready(function() {
-        $('mon-select2').select2();
-    });
   </script>
   <script language="javascript" type="text/javascript">
     function redirection(test_form) {
