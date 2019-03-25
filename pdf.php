@@ -1,56 +1,52 @@
 <?php
-/*session_start();*/
+session_start();
+
+include "../init.php";
+$clubDAO = new ClubDAO();
+$adherentDAO = new AdherentDAO();
+$responsableDAO = new ResponsableDAO ();
+$bordereauDAO = new BordereauDAO();
+$indemniteDAO = new IndemniteDAO();
+$statutDAO = new StatutDAO();
+$StatutAttente = $statutDAO->findByLibelle('En attente');
+$StatutCloturer= $statutDAO->findByLibelle('Cloturer');
+$Indemnites = $indemniteDAO->findAll();
+$bordereauEnCours = $bordereauDAO->findBordByIdUser($_SESSION['idUser'],$StatutAttente->get_Id_statut());
+$LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
+$cout_km=0;
+$total_bord =0;
+foreach($LignesFrais as $LigneFrais){
+ 
+ $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
+
+ foreach($Indemnites as $indemnite){
+   $anneeInd = explode("-", $indemnite->get_annee());
+
+   if($anneeInd[0] == $anneeBord[0]){
+     $cout_km = $LigneFrais->get_KM() * $indemnite->get_Tarif_kilometrique();
+   }
+ }
+}
+$total_bord = $total_bord + $LigneFrais->get_Cout_peages() + $LigneFrais->get_Cout_repas() + $LigneFrais->get_Cout_hebergement() + $cout_km;
 
 
+//$_SESSION['idUser'] = isset($_GET['idUser']) ? $_GET['idUser'] : '';
+$datetime = date("Y-m-d");
+$userConnecte = $responsableDAO->find($_SESSION['idUser']);
+$lesadherents = $adherentDAO->findAllAdherentbyResp($_SESSION['idUser']);
 
-require('lib/fpdf/fpdf.php');/*erreurs failed to open stream: No such file or directory in D:\xampp\htdocs\projet\PPE-G2-final\form\pdf.php on line 7
+require('../lib/fpdf/fpdf.php');/*erreurs failed to open stream: No such file or directory in D:\xampp\htdocs\projet\PPE-G2-final\form\pdf.php on line 7
 */
 /*$clu = $ClubDAO->findAllClub();*/
 class MON_PDF extends FPDF {
 
     function Header() {
         // Logo
-        $this->Image('img/logo.png',10,0,0,25);
+        
         // Police Arial gras 15
         $this->SetFont('Arial','B',20);
         // Titre
-        $this->Cell(0,10,'Recu dons aux oeuvres ','B',0,'C');
-        $this->SetFont('Arial','B',10);
-        $this->Ln(20);
-        $this->Cell(0,10,'Articles 200 et 238 bis du Code general des impots','B',5,'C'); /*n'est pas au bonne endroit  */
-        // Saut de ligne
-        $this->Cell(0,10,'Beneficiaire des versements',1,1,'C');/*je dois fermé le cadre et le grisé       * */
-        $this->Ln(20);
-        $this->SetFont('Times','B',12);
-        $this->Cell(0,0,'Nom ou denomination : ',0,1,'L');
-        $this->Ln(20);
-        /* $this->Cell(0,10,$clu->get_Adresse_club(),1,1,'C');*/
-        $this->Cell(0,0,'Adresse : ',0,1,'L');
-        $this->Ln(20);
-        $this->Cell(0,0,'Objet : ',0,1,'L');
-        $this->Ln(20);
-        $this->Ln(20);
-        $this->Cell(0,10,'Donateur',1,1,'C');/*je dois fermé le cadre et le grisé       * */
-        $this->Ln(20);
-        $this->Cell(0,0,'Nom : ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'Adresse : ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'code postal : ',0,1,'L');$this->Ln(10);$this->Cell(0,0,'Commune : ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'Le benficiaire reconnait avoir reçu au titre des versements ouvrant droit à réduction d\'impot, la somme de :  ',0,1,'L');
-        $this->Ln(5);
-        $this->Cell(0,0,' :  ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'Somme en toutes lettres  :  ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'Date de paiment :  ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,0,'Mode de versement :  ',0,1,'L');
-        $this->Ln(10);
-        $this->Cell(0,10,'Donateur',1,1,'C');
-
-
+      
 
 
 
@@ -63,7 +59,6 @@ class MON_PDF extends FPDF {
         // Police Arial italique 8
         $this->SetFont('Arial','I',8);
         // Numéro de page
-        $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}','T',0,'C');
       }
     }
 
@@ -71,14 +66,34 @@ class MON_PDF extends FPDF {
     $pdf = new MON_PDF();
 
     // Création d'une page
+    foreach ($lesadherents as $lesadherent){
+      $infoclub = $clubDAO->findclubbyidclub($lesadherent->get_ID_club());
     $pdf->AddPage();
-
+    $pdf->Image('../img/cerfa.png',-2,1,-75);
+    $pdf->SetFont('Arial','B',14);
+    $pdf->Cell(120,60,$infoclub->get_Nom_club(),'','','L');
+    $pdf->ln(1);
+    $pdf->Cell(40,80,$infoclub->get_Adresse_club().'-'.$infoclub->get_Cp().' '.$infoclub->get_Ville(),'','','L');
+    $pdf->ln(1);
+    $pdf->Cell(80,115,$infoclub->get_Nom_club(),'','','L');
+    $pdf->SetFont('Arial','B',11);
+    $pdf->ln(110);
+    $pdf->Cell(240,150,$userConnecte->get_prenom().' '.$userConnecte->get_nom(),'',1,'L');
+    $pdf->ln(0);
+    $pdf->Cell(40,-129,$userConnecte->get_rue(),'','','L');
+    $pdf->ln(1);
+    $pdf->Cell(35,-120,$userConnecte->get_cp(),'','','C');$pdf->Cell(75,-120,$userConnecte->get_Ville(),'','','C');
+    $pdf->ln(1);
+    $pdf->Cell(125,-88,$total_bord  ,'','','C');
+    $pdf->ln(1);
+    $pdf->Cell(110,-72,$datetime,'','','C');
     // Définit l'alias du nombre de pages {nb}
-    $pdf->AliasNbPages();
+  }
 
     // Boucle des lignes
 
-
+ 
+   
     // Génération du document PDF
     $pdf->Output();
     ?>
