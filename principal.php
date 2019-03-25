@@ -2,6 +2,7 @@
 session_start();
 include "init.php";
 $responsableDAO = new ResponsableDAO ();
+$adherentDAO = new AdherentDAO();
 $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
@@ -23,6 +24,8 @@ if($_SESSION['typeUser']==1){
 
   $ALLBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
   $bordereauCloturer=0;
+
+  $lesClubsByAdherents = $clubDAO->findClubCascadingRespAndAdherent($userConnecte->get_id_user());
 
   foreach ($ALLBordereaux as $unBordereau){
     if($unBordereau->get_Id_statut() == $StatutCloturer->get_Id_statut()){
@@ -105,7 +108,7 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
 
-        <a href="pdf.php">
+        <a href="form/pdf.php">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
               <span class="branding-bar">Générer PDF</span>
@@ -113,7 +116,7 @@ if($_SESSION['typeUser']==1){
         </a>
         &nbsp
         <!-- ouvre le dialog pour se déconnecter -->
-        <a href="logout.php">
+        <a href="logout.php" taget="_BLANK">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
               <span class="branding-bar">Déconnexion</span>

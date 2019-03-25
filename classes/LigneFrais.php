@@ -10,6 +10,7 @@ class LigneFrais {
   private $cout_hebergement='???';
   private $idMotif="???";
   private $ID_bordereau="???";
+  private $ID_club="???";
 
   function __construct(array $tableau = null) {
     if ($tableau != null) {
@@ -53,6 +54,10 @@ class LigneFrais {
       return $this->ID_bordereau;
   }
 
+  function get_ID_club() {
+      return $this->ID_club;
+  }
+
   function set_Id_ligne($id_ligne) {
       $this->id_ligne = $id_ligne;
   }
@@ -87,6 +92,10 @@ class LigneFrais {
 
   function set_ID_bordereau($ID_bordereau) {
       $this->ID_bordereau = $ID_bordereau;
+  }
+
+  function set_ID_club($ID_club) {
+      $this->ID_club = $ID_club;
   }
 
 

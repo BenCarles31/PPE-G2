@@ -82,14 +82,15 @@ Class BordereauDAO extends DAO{
     return $ligne;
   }
 
-  function update($idligne,$date,$trajet,$km,$peages,$repas,$hebergement,$motif){
+  function update($idligne,$date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idClub){
     $sql="update `ligne_frais` SET  `date_frais`=:date,
                                     `trajet`=:trajet,
                                     `KM`=:km,
                                     `cout_peages`=:cout_peages,
                                     `cout_repas`=:cout_repas,
                                     `cout_hebergement`=:cout_hebergement,
-                                    `idMotif`=:id_motif
+                                    `idMotif`=:id_motif,
+                                    `ID_club`=:club
           WHERE id_ligne=:idLigne";
     $params = array(
       ':date'=>$date,
@@ -99,7 +100,8 @@ Class BordereauDAO extends DAO{
       ':cout_repas'=>$repas,
       ':cout_hebergement'=>$hebergement,
       ':id_motif'=>$motif,
-      ':idLigne'=>$idligne
+      ':idLigne'=>$idligne,
+      ':club'=>$idClub
     );
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();
@@ -127,9 +129,9 @@ Class BordereauDAO extends DAO{
 
   }
 
-  function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau){
+  function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau,$clubAdherent){
     $nb=null;
-    $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau);";
+    $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau,:club_adherent);";
     $params = array(
       ':date'=>$date,
       ':trajet'=>$trajet,
@@ -138,7 +140,8 @@ Class BordereauDAO extends DAO{
       ':cout_repas'=>$repas,
       ':cout_hebergement'=>$hebergement,
       ':id_motif'=>$motif,
-      ':id_bordereau'=>$idBordereau
+      ':id_bordereau'=>$idBordereau,
+      ':club_adherent'=>$clubAdherent
     );
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();

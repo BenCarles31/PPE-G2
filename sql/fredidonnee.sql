@@ -1,12 +1,8 @@
-
-
 INSERT INTO `indemnite` (`annee`, `tarif_kilometrique`) VALUES
-('2000-01-01' , 1)
-('2002-01-01' , 2)
-('20019-01-01' , 10);
-
--- --------------------------------------------------------
-
+('2018-00-00' ,1),
+('2000-01-01' ,1),
+('2002-01-01' ,2),
+('2019-01-01' ,10);
 
 INSERT INTO `ligue` (`ID_ligue`, `nom_ligue`) VALUES
 (1, 'Football'),
@@ -15,36 +11,19 @@ INSERT INTO `ligue` (`ID_ligue`, `nom_ligue`) VALUES
 (5, 'FootUS'),
 (6, 'Tennis');
 
--- --------------------------------------------------------
-
---
--- Déchargement des données de la table `club`
---
-
 INSERT INTO `club` (`ID_club`, `nom_club`, `adresse_club`, `cp`, `ville`, `sigle`, `nom_president`, `ID_ligue`) VALUES
 (1, 'Toulouse Football Club' , 'Stadium' , '31200' , 'Toulouse' , 'TFC' , 'Olivier Sadran' , 1),
 (2, 'Olympique Lyonnais' , 'Groupama Stadium' , '69150' , 'Lyon' , 'OL' , 'Jean-Michel Aulas' , 1),
-(3, 'Club Tennis Toulousain' , 'Gymnase de l\'hers' , '31250' , 'Balma' , 'CTT' , 'Jhon Doe' , 6),
-(4, 'Golf Club de l\'Escalet' , 'Golf de l\'Escalet' , '31820' , 'Saint-Pierre' , 'GolfdeL\'Escal' , 'Michel Marchand' , 4),
+(3, 'Club Tennis Toulousain' , "Gymnase de l\'hers" , '31250' , 'Balma' , 'CTT' , 'Jhon Doe' , 6),
+(4, "Golf Club de l\'Escalet", "Golf de l\'Escalet" , '31820' , 'Saint-Pierre' , "GolfdeL\'Escal" , 'Michel Marchand' , 4),
 (5, 'Golf Club de labastide' , 'Golf de Labastidet' , '82370' , 'Labastide-Saint-Pierre' , 'GdL' , 'Vincent Estieu' , 4),
 (6, 'Los Angeles Lakers' , 'Staple Center' , '99999' , 'Los Angeles' , 'LAL' , 'Lebron James' , 2),
 (7, 'Cleveland Cavaliers' , 'Quicken Loans Arena' , '99999' , 'Clevland' , 'CC' , 'Lebron Aussi' , 2);
-
-
---
--- Déchargement des données de la table `type_utilisateur`
---
 
 INSERT INTO `type_utilisateur` (`ID_type`, `libelle`) VALUES
 (1, 'utilisateur'),
 (2, 'Trésorier'),
 (3, 'CRIB');
-
--- --------------------------------------------------------
--- --------------------------------------------------------
---
--- Déchargement des données de la table `utilisateur`
---
 
 INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `rue`, `cp`, `Ville`, `email`, `mdp`, `ID_type`) VALUES
 (1, 'Vinso' , 'vinz' , 'Tacos Avenue' , 31100, 'Toulouse' , 'vinz@email.com' , 'vinzvinz' , 1),
@@ -95,10 +74,6 @@ INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `rue`, `cp`, `Ville`, `em
 (46,'ZUEL' ,'STEPHANIE' ,'8 sentier de Saint-Arriant' ,54520,'Laxou' ,'zuel.stephanie@gmail.com' ,'ppe_g2' ,1),
 (47,'ZUERO' ,'THOMAS' ,'immeuble Savoie' ,54520,'Laxou' ,'zuero.thomas@gmail.com' ,'ppe_g2' ,1);
 
---
--- Déchargement des données de la table `adherent`
---
-
 INSERT INTO `adherent` (`num_license`, `nom`, `prenom`, `sexe`, `date_naissance`, `ID_club`, `id_user`) VALUES
 (666, 'Diablo' , 'Diablo' , '0' , '2018-11-14' , 2, 1),
 (1234, 'vinz' , 'vinso' , '0' , '2018-10-25' , 1, 1),
@@ -147,13 +122,6 @@ INSERT INTO `adherent` (`num_license`, `nom`, `prenom`, `sexe`, `date_naissance`
 (1705400437,'ZOECKEL' ,'MATHIEU' ,'M' ,'2000-06-02' ,1,45),
 (1705401018,'ZUEL' ,'STEPHANIE' ,'F' ,'1970-09-25' ,1,46),
 (1705401048,'ZUERO' ,'THOMAS' ,'M' ,'2000-08-14' ,1,47);
------------------------------------------------------------
-
-
-
---
--- Déchargement des données de la table `motif`
---
 
 INSERT INTO `motif` (`idMotif`, `libelle`) VALUES
 (1, 'Réunion'),
@@ -162,33 +130,16 @@ INSERT INTO `motif` (`idMotif`, `libelle`) VALUES
 (4, 'Compétition internationnale'),
 (5, 'Stage');
 
--- --------------------------------------------------------
-
---
--- Déchargement des données de la table `statut`
---
-
 INSERT INTO `statut` (`id_statut`, `libelle`) VALUES
 (1, 'En attente'),
 (2, 'Cloturer'),
 (3, 'Valider');
-
--- --------------------------------------------------------
-
---
--- Déchargement des données de la table `bordereau`
---
 
 INSERT INTO `bordereau` (`ID_bordereau`, `date_bordereau`, `id_user`, `id_statut`) VALUES
 (5, '2017-11-05' , 1, 1),
 (6, '2018-10-12' , 7, 1),
 (8, '2017-12-10' , 9, 1),
 (10, '2018-12-10' , 1, 1);
-
--- --------------------------------------------------------
---
--- Déchargement des données de la table `ligne_frais`
---
 
 INSERT INTO `ligne_frais` (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peages`, `cout_repas`, `cout_hebergement`, `idMotif`, `ID_bordereau`) VALUES
 (1, '2018-11-09' , 'tlse balma ' , 25, 0, 0, 0, 5, 5),
@@ -198,12 +149,3 @@ INSERT INTO `ligne_frais` (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peage
 (7, '2018-12-15' , 'Toulouse-Montauban' , 70, 0, 0, 0, 4, 6),
 (8, '2018-12-15' , 'Toulouse-Montauban' , 70, 0, 0, 0, 4, 6),
 (9, '2018-12-10' , 'Montauban-Toulouse' , 45, 12.3, 0, 0, 3, 10);
-
--- --------------------------------------------------------
-
-
-
-
-
-
-

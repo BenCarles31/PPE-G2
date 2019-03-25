@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 11 déc. 2018 à 11:34
--- Version du serveur :  10.1.29-MariaDB
--- Version de PHP :  7.1.12
+-- Généré le :  lun. 25 mars 2019 à 16:50
+-- Version du serveur :  10.1.38-MariaDB
+-- Version de PHP :  7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `newfredi`
 --
-CREATE DATABASE IF NOT EXISTS `newfredi` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE DATABASE IF NOT EXISTS `newfredi` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `newfredi`;
 
 -- --------------------------------------------------------
@@ -30,7 +30,6 @@ USE `newfredi`;
 -- Structure de la table `adherent`
 --
 
-DROP TABLE IF EXISTS `adherent`;
 CREATE TABLE IF NOT EXISTS `adherent` (
   `num_license` int(12) NOT NULL,
   `nom` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -44,11 +43,12 @@ CREATE TABLE IF NOT EXISTS `adherent` (
   KEY `Adherent_utilisateur0_FK` (`id_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `bordereau`
 --
 
-DROP TABLE IF EXISTS `bordereau`;
 CREATE TABLE IF NOT EXISTS `bordereau` (
   `ID_bordereau` int(11) NOT NULL AUTO_INCREMENT,
   `date_bordereau` date NOT NULL,
@@ -57,15 +57,14 @@ CREATE TABLE IF NOT EXISTS `bordereau` (
   PRIMARY KEY (`ID_bordereau`),
   KEY `Bordereau_utilisateur_FK` (`id_user`),
   KEY `Bordereau_statut1_FK` (`id_statut`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `club`
 --
 
-DROP TABLE IF EXISTS `club`;
 CREATE TABLE IF NOT EXISTS `club` (
   `ID_club` int(11) NOT NULL AUTO_INCREMENT,
   `nom_club` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -77,27 +76,26 @@ CREATE TABLE IF NOT EXISTS `club` (
   `ID_ligue` int(11) NOT NULL,
   PRIMARY KEY (`ID_club`),
   KEY `Club_Ligue_FK` (`ID_ligue`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `indemnite`
 --
 
-DROP TABLE IF EXISTS `indemnite`;
 CREATE TABLE IF NOT EXISTS `indemnite` (
   `annee` date NOT NULL,
   `tarif_kilometrique` float NOT NULL,
   PRIMARY KEY (`annee`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `ligne_frais`
 --
 
-DROP TABLE IF EXISTS `ligne_frais`;
 CREATE TABLE IF NOT EXISTS `ligne_frais` (
   `id_ligne` int(11) NOT NULL AUTO_INCREMENT,
   `date_frais` date NOT NULL,
@@ -113,68 +111,62 @@ CREATE TABLE IF NOT EXISTS `ligne_frais` (
   KEY `ligne_frais_Motif_FK` (`idMotif`),
   KEY `ligne_frais_Bordereau0_FK` (`ID_bordereau`),
   KEY `id_club_FK` (`ID_club`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `ligue`
 --
 
-DROP TABLE IF EXISTS `ligue`;
 CREATE TABLE IF NOT EXISTS `ligue` (
   `ID_ligue` int(11) NOT NULL AUTO_INCREMENT,
   `nom_ligue` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`ID_ligue`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Déchargement des données de la table `ligue`
---
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `motif`
 --
 
-DROP TABLE IF EXISTS `motif`;
 CREATE TABLE IF NOT EXISTS `motif` (
   `idMotif` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`idMotif`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `statut`
 --
 
-DROP TABLE IF EXISTS `statut`;
 CREATE TABLE IF NOT EXISTS `statut` (
   `id_statut` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id_statut`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `type_utilisateur`
 --
 
-DROP TABLE IF EXISTS `type_utilisateur`;
 CREATE TABLE IF NOT EXISTS `type_utilisateur` (
   `ID_type` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(50) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`ID_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `utilisateur`
 --
 
-DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -187,8 +179,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `ID_type` int(11) NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `utilisateur_type_utilisateur_FK` (`ID_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Contraintes pour les tables déchargées
@@ -218,9 +209,9 @@ ALTER TABLE `club`
 -- Contraintes pour la table `ligne_frais`
 --
 ALTER TABLE `ligne_frais`
+  ADD CONSTRAINT `id_club_FK` FOREIGN KEY (`ID_club`) REFERENCES `club` (`ID_club`),
   ADD CONSTRAINT `ligne_frais_Bordereau0_FK` FOREIGN KEY (`ID_bordereau`) REFERENCES `bordereau` (`ID_bordereau`),
-  ADD CONSTRAINT `ligne_frais_Motif_FK` FOREIGN KEY (`idMotif`) REFERENCES `motif` (`idMotif`),
-  ADD CONSTRAINT `id_club_FK` FOREIGN KEY (`ID_club`) REFERENCES `club` (`ID_club`);
+  ADD CONSTRAINT `ligne_frais_Motif_FK` FOREIGN KEY (`idMotif`) REFERENCES `motif` (`idMotif`);
 
 --
 -- Contraintes pour la table `utilisateur`

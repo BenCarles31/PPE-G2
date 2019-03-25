@@ -3,6 +3,7 @@
 $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
 $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
 $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
+$clubAdherent = isset($_POST['nom_club']) ? $_POST['nom_club'] : '';
 $trajet = isset($_POST['trajet']) ? $_POST['trajet'] : '???';
 $km = isset($_POST['KM']) ? $_POST['KM'] : '???';
 $peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
@@ -17,7 +18,7 @@ if($valid_ajout_ligne_bordereau==1){
     $peages = '0';
   }*/
 
-  $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
+  $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau(),$clubAdherent);
   redirige('principal.php');
 }
 ?>
@@ -47,6 +48,19 @@ if($valid_ajout_ligne_bordereau==1){
              </div>
 
              <div class="form-group">
+               <label>Club:</label>
+               <select data-role="select" class="mon-select2" data-validate="required not=-1" name="nom_club" size=1>
+               <option value="-1" class="d-none"></option>
+               <?php
+                  //affiche le res de la requete select tout les club dans liste deroulante
+                  foreach($lesClubsByAdherents as $unClubsByAdherents){
+                    echo('<option value="'.$unClubsByAdherents->get_ID_club().'">'.$unClubsByAdherents->get_Nom_club().'</option>');
+                  }
+               ?>
+               </select>
+             </div>
+
+             <div class="form-group">
                  <input type="text" name="trajet" data-prepend="<span class='mif-envelop'>" placeholder="Saisir trajet">
              </div>
 
@@ -66,6 +80,6 @@ if($valid_ajout_ligne_bordereau==1){
                  <input type="text" name="hebergement" data-prepend="<span class='mif-envelop'>" placeholder="saisir hebergement">
              </div>
              <div class="form-group">
-             <button id="test_form" name="valid_ajout_ligne_bordereau" value="1" class="button">Ajout d'une ligne</button><br/>
+             <button id="test_form" name="valid_ajout_ligne_bordereau" value="1" class="button success">Ajout d'une ligne</button><br/>
              </div>
      </form>

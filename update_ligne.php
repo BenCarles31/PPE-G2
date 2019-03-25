@@ -7,6 +7,8 @@ $bordereauDAO = new BordereauDAO();
 $indemniteDAO = new IndemniteDAO();
 $motifDAO = new MotifDAO();
 $statutDAO = new StatutDAO();
+$clubDAO = new ClubDAO();
+$allClubs = $clubDAO->findAllClub();
 $Motifs = $motifDAO->findAll();
 
 
@@ -15,15 +17,24 @@ $StatutAttente = $statutDAO->findByLibelle('En attente');
 if($_SESSION['typeUser']==1){
   $userConnecte = $responsableDAO->find($_SESSION['idUser']);
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
+  $lesClubsByAdherents = $clubDAO->findClubCascadingRespAndAdherent($userConnecte->get_id_user());
 }
 
 if (isset($_GET['idLigne'])) {
     $idLigne = $_GET['idLigne'];
     $ligneModifier = $bordereauDAO->findUneLigne($idLigne);
+
     foreach($Motifs as $Motif){
       if($Motif->get_IdMotif()==$ligneModifier->get_IdMotif()){
         $motifLigneModifier = $Motif->get_Libelle();
         $IdMotifLigneModifier = $Motif->get_IdMotif();
+      }
+    }
+
+    foreach($allClubs as $unclub){
+      if($unclub->get_ID_club()==$ligneModifier->get_ID_club()){
+        $clubLigneModifier = $unclub->get_Nom_club();
+        $IdClubfLigneModifier = $unclub->get_ID_club();
       }
     }
 }
@@ -32,6 +43,7 @@ if (isset($_GET['idLigne'])) {
 $valid_modif_ligne_bordereau = isset($_POST['valid_modif_ligne_bordereau']) ? $_POST['valid_modif_ligne_bordereau'] : '0';
 $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
 $motif = isset($_POST['motif']) ? $_POST['motif'] : '';
+$clubAdherent = isset($_POST['nom_club']) ? $_POST['nom_club'] : '';
 $trajet = isset($_POST['trajet']) ? $_POST['trajet'] : 'null';
 $km = isset($_POST['KM']) ? $_POST['KM'] : 'null';
 $peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
@@ -39,7 +51,7 @@ $repas = isset($_POST['repas']) ? $_POST['repas'] : 'null';
 $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 
 if($valid_modif_ligne_bordereau==1){
-  $bordereauDAO->update($ligneModifier->get_Id_ligne(),$date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif);
+  $bordereauDAO->update($ligneModifier->get_Id_ligne(),$date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$clubAdherent);
 
   redirige('principal.php');
 }
@@ -76,12 +88,25 @@ if($valid_modif_ligne_bordereau==1){
 
               <div class="form-group">
                 <label>Motif:</label>
-                <select data-role="select" data-validate="required not=-1" name="motif" size=1>
+                <select data-role="select" class="mon-select2" data-validate="required not=-1" name="motif" size=1>
                <option value="<?php echo $IdMotifLigneModifier;?>"><?php echo $motifLigneModifier; ?></option>
                 <?php
                    //affiche les libelle des motifs en liste déroulante
                    foreach($Motifs as $Motif){
                      echo('<option value="'.$Motif->get_IdMotif().'">'.$Motif->get_Libelle().'</option>');
+                   }
+                ?>
+               </select>
+              </div>
+
+              <div class="form-group">
+                <label>Club:</label>
+                <select data-role="select" class="mon-select2" data-validate="required not=-1" name="nom_club" size=1>
+               <option value="<?php echo $IdClubfLigneModifier;?>"><?php echo $clubLigneModifier; ?></option>
+                <?php
+                   //affiche les libelle des motifs en liste déroulante
+                   foreach($lesClubsByAdherents as $unClubsByAdherents){
+                     echo('<option value="'.$unClubsByAdherents->get_ID_club().'">'.$unClubsByAdherents->get_Nom_club().'</option>');
                    }
                 ?>
                </select>
