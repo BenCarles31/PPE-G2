@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../init.php";
+include '..'.DS.'init.php';
 $motifDAO = new MotifDAO();
 
 $valid_update_motif = isset($_POST['val_update_motif']) ? $_POST['val_update_motif'] : '';
@@ -13,13 +13,13 @@ if($valUpdate){
   $idMotifUpadte = isset($_POST['idMotifUpdate']) ? $_POST['idMotifUpdate'] : '';
   $libelle = isset($_POST['libelle_motif']) ? $_POST['libelle_motif'] : '';
   $motifDAO->updateMotif($libelle,$idMotifUpadte);
-  redirige('../principal.php');
+  redirige(ROOT .'../principal.php');
 }
 
 if($valAdd){
   $libelle = isset($_POST['libelle_motif']) ? $_POST['libelle_motif'] : '';
   $motifDAO->addMotif($libelle);
-  redirige('../principal.php');
+  redirige(ROOT .'../principal.php');
 }
 ?>
 <!DOCTYPE html>

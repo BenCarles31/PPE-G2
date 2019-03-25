@@ -13,7 +13,7 @@
 
   if($valid_ajout_adherent==1){
     $responsableDAO->addAdherent($num_license,$nom,$prenom,$sexe,$date_naiss,$ajout_club,$userConnecte->get_id_user());
-    header('Location: principal.php');
+    redirige('principal.php');
   }
 ?>
 <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"

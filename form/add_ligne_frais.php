@@ -1,5 +1,4 @@
 <?php
-/*
 //recup formulaire
 $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
 $date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
@@ -12,17 +11,15 @@ $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 
 if($valid_ajout_ligne_bordereau==1){
 
-  $anneeBordControle = explode("-", $bordereauEnCours->get_Date_bordereau());
-  $anneeIndControle = explode("-", $date_frais);
+  /*if($trajet = '???'){
+    $trajet = 'aucun';
+    $km = '0';
+    $peages = '0';
+  }*/
 
-  if($anneeBordControle[0]==$anneeIndControle[0]){
-    $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
-    redirige('principal.php');
-  }
-  echo ('<div data-role="window" data-title="Window title" data-shadow="true" class="p-2">
-           L\'année d\'une ligne de frais doit correspondre à l\'année du bordereau.
-        </div>');
-}*/
+  $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
+  redirige('principal.php');
+}
 ?>
  <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"
        action="#"

@@ -15,7 +15,7 @@ $idBordereau = isset($_POST['idBordereau']) ? $_POST['idBordereau'] : '';
 
 if($cloturerBordereau){
   $bordereauDAO->updateStatutBordereau($StatutCloturer->get_Id_statut(),$idBordereau);
-  redirige('principal.php');
+  redirige(ROOT .'principal.php');
 }
 ?>
 <!DOCTYPE html>

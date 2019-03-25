@@ -13,7 +13,7 @@ abstract class DAO {
   */
   function get_connection() {
     // On construit le DSN
-    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME;
+    $dsn = "mysql:host=".DB_HOST . ";dbname=".DB_NAME;
     // On se connecte à la base de données
     try {
       $this->pdo=new PDO($dsn, DB_USER, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));

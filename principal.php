@@ -20,7 +20,7 @@ $userConnecte = $responsableDAO->find($_SESSION['idUser']);
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
-$_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
+
   $ALLBordereaux = $bordereauDAO->findAllBordByUser($userConnecte->get_id_user());
   $bordereauCloturer=0;
 
@@ -36,6 +36,7 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
 <head lang="fr">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-all.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro.min.css">
   <link rel="stylesheet" href="https://cdn.metroui.org.ua/v4/css/metro-colors.min.css">
@@ -53,12 +54,12 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
     <?php if($_SESSION['idUser']!=0 && $_SESSION['typeUser']==1) {
 
       ?>
-      <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/creer_bordereau.php'; ?></div>
-      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_adherent.php'; ?></div>
-      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_bordereau.php'; ?></div>
-      <div class="dialog" id="W_aff_oldBordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/afficher_oldBordereau.php'; ?></div>
-      <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_ligne_frais.php'; ?></div>
-      <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_profil.php'; ?></div>
+      <div class="dialog" id="W_creation_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form'.DS.'creer_bordereau.php'; ?></div>
+      <div class="dialog" id="W_add_adherent" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form'.DS.'add_adherent.php'; ?></div>
+      <div class="dialog" id="W_aff_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'afficher_bordereau.php'; ?></div>
+      <div class="dialog" id="W_aff_oldBordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'afficher_oldBordereau.php'; ?></div>
+      <div class="dialog" id="W_ajout_ligne_frais" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form'.DS.'add_ligne_frais.php'; ?></div>
+      <div class="dialog" id="W_gestion_profil" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'gestion_profil.php'; ?></div>
 
       <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="Accueil">
         <?php if($bordereauEnCours->get_Id_statut()=='???' && $_SESSION['typeUser']==1){ ?>
@@ -103,13 +104,14 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
           <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_profil')"></span>
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
-        <!-- ouvre le dialog pour creer un bordereau -->
-        <a href='form/pdf.php'>
-        <div data-role="tile" class="bg-indigo fg-white">
-          <span class="mif-github icon" ></span>
-          <span class="branding-bar" >Production Pdf</span>
-        </div>
+
+        <a href="pdf.php">
+          <div data-role="tile" class="bg-indigo fg-white">
+              <span class="mif-github icon"></span>
+              <span class="branding-bar">Générer PDF</span>
+          </div>
         </a>
+        &nbsp
         <!-- ouvre le dialog pour se déconnecter -->
         <a href="logout.php">
           <div data-role="tile" class="bg-indigo fg-white">
@@ -123,8 +125,8 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
         }
         if($_SESSION['idUser']!=0 && ($_SESSION['typeUser']==3 || $_SESSION['typeUser']==2)) {
       ?>
-      <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form/gestion_motif.php' ?></div>
-      <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form/add_tarif_kilometrique.php'; ?></div>
+      <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'gestion_motif.php' ?></div>
+      <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form'.DS.'add_tarif_kilometrique.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
@@ -173,6 +175,7 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script>
     function invalidForm(){
       var form  = $(this);
@@ -186,6 +189,11 @@ $_SESSION['idbordereauencours'] = $bordereauEnCours->get_ID_bordereau();
         opacity: 0
       });
     }
+  </script>
+  <script>
+    $(document).ready(function() {
+        $('mon-select2').select2();
+    });
   </script>
   <script language="javascript" type="text/javascript">
     function redirection(test_form) {
