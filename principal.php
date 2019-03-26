@@ -86,8 +86,11 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
         </div>
       <?php
+          //recup du submit de add ligne de frais
           $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
+
           if($valid_ajout_ligne_bordereau==1){
+            //controle de la correspondance des dates des ligne de frais et du bordereau + insertion
             include 'form'.DS.'ControleDateInsertionLigneFrais.php';
           }
         }
@@ -179,7 +182,6 @@ if($_SESSION['typeUser']==1){
         }
       ?>
   </div>
-
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
