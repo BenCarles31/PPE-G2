@@ -68,6 +68,19 @@ Class BordereauDAO extends DAO{
     return $tableau;
   }
 
+  function findLigneFraisByClub($idclub){
+    $sql = "select * from ligne_frais where ID_club=:club";
+    $params = array(":club" => $idclub);
+    $sth = $this->executer($sql, $params);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new LigneFrais($row);
+    }
+    // Retourne un tableau d\'objet métier
+    return $tableau;
+  }
+
   function findUneLigne($idligne){
     $sql = "select * from ligne_frais where id_ligne=:idLigne";
     $params = array(":idLigne" => $idligne);
