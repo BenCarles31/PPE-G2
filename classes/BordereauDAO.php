@@ -119,7 +119,6 @@ Class BordereauDAO extends DAO{
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();
     return $nb; // Retourne le nombre de mise à jour
-
   }
 
   function findDateBordereau($idBordereau){
@@ -168,7 +167,6 @@ Class BordereauDAO extends DAO{
     $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
     $nb = $sth->rowcount();
     return $nb; // Retourne le nombre de mise à jour
-
   }
 
   function creation_bordereau($date,$id_user,$user_type,$statut) {

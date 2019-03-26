@@ -2,7 +2,7 @@
 Class AdherentDAO extends DAO {
 
   function find($idAdherent){
-    $sql = "select * from utilisateur where num_license=:idAdherent";
+    $sql = "select * from adherent where num_license=:idAdherent";
     $params = array(":idAdherent" => $idAdherent);
     $sth = $this->executer($sql, $params);
     $row = $sth->fetch(PDO::FETCH_ASSOC);
@@ -53,6 +53,38 @@ Class AdherentDAO extends DAO {
       }
       // Retourne l'objet métier
       return $club;
+    }
+
+    function deleteAdherent($license){
+      $sql = "delete from adherent where num_license = :license";
+
+      $params = array(':license'=>$license);
+      $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+      $nb = $sth->rowcount();
+      return $nb; // Retourne le nombre de mise à jour
+    }
+
+    function updateAdherent($license,$nom,$prenom,$sexe,$date_naissance,$id_club,$idResp){
+      $sql="update `adherent` SET  `num_license`=:license,
+                                    `nom`=:nom,
+                                    `prenom`=:prenom,
+                                    `sexe`=:sexe,
+                                    `date_naissance`=:date_naiss,
+                                    `ID_club`=:club
+            WHERE id_user=:idResp";
+      $params = array(
+        ':license'=>$license,
+        ':nom'=>$nom,
+        ':prenom'=>$prenom,
+        ':sexe'=>$sexe,
+        ':date_naiss'=>$date_naissance,
+        ':club'=>$id_club,
+        ':idResp'=>$idResp,
+
+      );
+      $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
+      $nb = $sth->rowcount();
+      return $nb; // Retourne le nombre de mise à jour
     }
 
 
