@@ -140,12 +140,3 @@ INSERT INTO `bordereau` (`ID_bordereau`, `date_bordereau`, `id_user`, `id_statut
 (6, '2018-10-12' , 7, 1),
 (8, '2017-12-10' , 9, 1),
 (10, '2018-12-10' , 1, 1);
-
-INSERT INTO `ligne_frais` (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peages`, `cout_repas`, `cout_hebergement`, `idMotif`, `ID_bordereau`) VALUES
-(1, '2018-11-09' , 'tlse balma ' , 25, 0, 0, 0, 5, 5),
-(2, '2018-11-05' , 'paris tls' , 650, 0, 0, 0, 2, 5),
-(3, '2018-11-19' , 'Toulouse-Bressols' , 42, 5.5, 12.6, 17, 4, 5),
-(6, '2018-12-05' , 'Toulouse-Montauban' , 100, 10, 10, 10, 2, 5),
-(7, '2018-12-15' , 'Toulouse-Montauban' , 70, 0, 0, 0, 4, 6),
-(8, '2018-12-15' , 'Toulouse-Montauban' , 70, 0, 0, 0, 4, 6),
-(9, '2018-12-10' , 'Montauban-Toulouse' , 45, 12.3, 0, 0, 3, 10);

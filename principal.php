@@ -86,6 +86,10 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_ajout_ligne_frais')">Ajouter ligne frais</span>
         </div>
       <?php
+          $valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
+          if($valid_ajout_ligne_bordereau==1){
+            include 'form'.DS.'ControleDateInsertionLigneFrais.php';
+          }
         }
         if($bordereauCloturer>0){
       ?>

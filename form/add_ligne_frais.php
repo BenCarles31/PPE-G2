@@ -1,28 +1,4 @@
-<?php
-//recup formulaire
-$valid_ajout_ligne_bordereau = isset($_POST['valid_ajout_ligne_bordereau']) ? $_POST['valid_ajout_ligne_bordereau'] : '0';
-$date_frais = isset($_POST['date_frais']) ? $_POST['date_frais'] : '';
-$motif = isset($_POST['motif']) ? $_POST['motif'] : '';
-$clubAdherent = isset($_POST['nom_club']) ? $_POST['nom_club'] : '';
-$trajet = isset($_POST['trajet']) ? $_POST['trajet'] : '???';
-$km = isset($_POST['KM']) ? $_POST['KM'] : '???';
-$peages = isset($_POST['peages']) ? $_POST['peages'] : 'null';
-$repas = isset($_POST['repas']) ? $_POST['repas'] : 'null';
-$hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
-
-if($valid_ajout_ligne_bordereau==1){
-
-  /*if($trajet = '???'){
-    $trajet = 'aucun';
-    $km = '0';
-    $peages = '0';
-  }*/
-
-  $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau(),$clubAdherent);
-  redirige('principal.php');
-}
-?>
- <form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"
+<form class="login-form bg-white p-6 mx-auto border bd-default win-shadow"
        action="#"
        method="POST">
 

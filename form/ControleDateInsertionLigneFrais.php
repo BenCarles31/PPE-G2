@@ -15,9 +15,12 @@ $anneeIndControle = explode("-", $date_frais);
 //compare si l'annee de la ligne de frais correspond à l'annee du bordereau
 if($anneeBordControle[0]==$anneeIndControle[0]){
   $bordereauDAO->insertLigneFrais($date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$bordereauEnCours->get_ID_bordereau());
+  $anneeBordControle = 0;
+  $anneeIndControle = 0;
   redirige('principal.php');
 }else{
   echo ('<div data-role="window" data-title="Erreur contrôle des dates" data-shadow="true" class="p-2" style="z-index: 100;">
              L\'année d\'une ligne de frais doit correspondre à l\'année du bordereau.
         </div>');
+}
 ?>
