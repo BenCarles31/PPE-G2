@@ -11,6 +11,7 @@ if (isset($_GET['numLicense'])) {
     //trouve club d el'adherent
     $clubAdherent = $clubDAO->find($adherent->get_ID_club());
 }
+
 $lesClubs = $clubDAO->findAllClub();
 
 //recup submit update adherent
@@ -18,14 +19,13 @@ $validUpdateAdherent = isset($_POST['valid_update_adherent']) ? $_POST['valid_up
 
 if($validUpdateAdherent==1){
   //recup formulaire
-  $license = isset($_POST['num_license']) ? $_POST['num_license'] : '';
   $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
   $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
   $sexe = isset($_POST['sexe']) ? $_POST['sexe'] : '';
   $date_naissance = isset($_POST['date_naissance']) ? $_POST['date_naissance'] : '';
   $id_club = isset($_POST['nom_club']) ? $_POST['nom_club'] : '';
 
-  $adherentDAO->updateAdherent($license,$nom,$prenom,$sexe,$date_naissance,$id_club,);
+  $adherentDAO->updateAdherent($nom,$prenom,$sexe,$date_naissance,$id_club,$adherent->get_Id_user(),$adherent->get_Num_license());
 
   redirige('../principal.php');
 }
@@ -56,10 +56,6 @@ if($validUpdateAdherent==1){
         <hr class="thin mt-4 mb-4 bg-white">
 
             <div class="form-group">
-                <input type="text" name="num_license" data-prepend="<span class='mif-envelop'>" value="<?php echo $adherent->get_Num_license(); ?>">
-            </div>
-
-            <div class="form-group">
                 <input type="text" name="nom" data-prepend="<span class='mif-envelop'>" value="<?php echo $adherent->get_Nom(); ?>">
             </div>
 
@@ -68,7 +64,12 @@ if($validUpdateAdherent==1){
             </div>
 
             <div class="form-group">
-                <input type="text" name="sexe" data-prepend="<span class='mif-envelop'>" value="<?php echo $adherent->get_Sexe(); ?>">
+              <label>Sexe:</label>
+            	<select data-role="select" class="mon-select2" name="sexe" size=3>
+              	<option value="1">Masculin</option>
+                <option value="2">Feminin</option>
+                <option value="3">Non-binaire</option>
+            	</select>
             </div>
 
             <div class="form-group">
@@ -92,4 +93,38 @@ if($validUpdateAdherent==1){
               <button id="test_form" name="valid_update_adherent" value="1" class="button success">Modifier l'adhérent</button><br/>
             </div>
       </form>
-   </center
+   </center>
+   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+   <script>
+     function invalidForm(){
+       var form  = $(this);
+       form.addClass("ani-ring");
+       setTimeout(function(){
+         form.removeClass("ani-ring");
+       }, 1000);
+     }
+     function validateForm(){
+       $(".login-form").animate({
+         opacity: 0
+       });
+     }
+   </script>
+   <script>
+     $(document).ready(function() {
+         $('mon-select2').select2();
+     });
+   </script>
+   <script language="javascript" type="text/javascript">
+     function redirection(test_form) {
+       document.getElementById(test_form).submit();
+     }
+   </script>
+   <script language="javascript" type="text/javascript">
+     function opendialog(dialog) {
+       document.getElementById(dialog).Metro.dialog.open();
+     }
+   </script>
+ </body>
+ </html>

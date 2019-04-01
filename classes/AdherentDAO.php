@@ -64,22 +64,22 @@ Class AdherentDAO extends DAO {
       return $nb; // Retourne le nombre de mise à jour
     }
 
-    function updateAdherent($license,$nom,$prenom,$sexe,$date_naissance,$id_club,$idResp){
-      $sql="update `adherent` SET  `num_license`=:license,
-                                    `nom`=:nom,
+    function updateAdherent($nom,$prenom,$sexe,$date_naissance,$id_club,$idResp,$license){
+      $sql="update `adherent` SET   `nom`=:nom,
                                     `prenom`=:prenom,
                                     `sexe`=:sexe,
                                     `date_naissance`=:date_naiss,
                                     `ID_club`=:club
-            WHERE id_user=:idResp";
+                              WHERE `id_user`=:idResp
+                              AND   `num_license`=:license";
       $params = array(
-        ':license'=>$license,
         ':nom'=>$nom,
         ':prenom'=>$prenom,
         ':sexe'=>$sexe,
         ':date_naiss'=>$date_naissance,
         ':club'=>$id_club,
         ':idResp'=>$idResp,
+        ':license'=>$license
 
       );
       $sth = $this->executer($sql, $params); // On passe par la méthode de la classe mère
