@@ -7,7 +7,7 @@ $adherentConnected = null;
 
 if($validLogin==1){
   $adherentConnected = $responsableDAO->findAdherentByEmailPass($email, $pass);
-  if($adherentConnected->get_email()!='???'){
+  if($adherentConnected->get_email()== $email && $adherentConnected->get_mdp()== $pass){
     $_SESSION['idUser'] = $adherentConnected->get_id_user();
     $_SESSION['typeUser'] = $adherentConnected->get_ID_type();
     redirige('principal.php');
