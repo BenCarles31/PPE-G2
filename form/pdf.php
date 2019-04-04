@@ -1,7 +1,7 @@
 <?php
 session_start();
-
 include "../init.php";
+
 $clubDAO = new ClubDAO();
 $adherentDAO = new AdherentDAO();
 $responsableDAO = new ResponsableDAO ();
@@ -15,6 +15,7 @@ $Indemnites = $indemniteDAO->findAll();
 $bordereauEnCours = $bordereauDAO->findBordByIdUser($_SESSION['idUser'],$StatutAttente->get_Id_statut());
 $LignesFrais = $bordereauDAO->findLigneFrais($bordereauEnCours->get_ID_bordereau());
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
+
 $lesadherents = $adherentDAO->findAllAdherentbyResp($_SESSION['idUser']);
 $lesClubsadherents = $clubDAO->findClubCascadingRespAndAdherent($_SESSION['idUser']);
 
@@ -72,7 +73,6 @@ foreach($lesClubsadherents as $unClub){
   $infoclub = $clubDAO->find($unClub->get_ID_club());
 
   $pdf->AddPage();
-  $pdf->Image('../img/cerfa.png',-2,1,-75);
   $pdf->SetFont('Arial','B',14);
   $pdf->Cell(120,60,$infoclub->get_Nom_club(),'','','L');
   $pdf->ln(1);

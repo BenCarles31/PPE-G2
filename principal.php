@@ -18,6 +18,7 @@ $Motifs = $motifDAO->findAll();
 $Indemnites = $indemniteDAO->findAll();
 
 $userConnecte = $responsableDAO->find($_SESSION['idUser']);
+
 if($_SESSION['typeUser']==1){
   $date = date('Y-m-d');
   $bordereauEnCours = $bordereauDAO->findBordByIdUser($userConnecte->get_id_user(),$StatutAttente->get_Id_statut());
@@ -115,7 +116,7 @@ if($_SESSION['typeUser']==1){
           <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_profil')">Gestion du profil</span>
         </div>
 
-        <a href="form/pdf.php">
+        <a href="form/pdfRepresentant.php">
           <div data-role="tile" class="bg-indigo fg-white">
               <span class="mif-github icon"></span>
               <span class="branding-bar">Générer PDF</span>

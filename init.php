@@ -61,9 +61,9 @@ function redirige($url)
    die('<meta http-equiv="refresh" content="0;URL='.$url.'">');
 }
 
-
+/*
 // Emplacement du fichier des tokens
 define("TOKEN_FILENAME",ROOT.DS."maj".DS."PPE-G2".DS."api".DS."files".DS."tokens.txt");
 
 // Inclut les fonctions
-require_once ROOT.DS."maj".DS."PPE-G2".DS."inc".DS."fonctions.inc.php";
+require_once ROOT."PPE-G2".DS."inc".DS."fonctions.inc.php";*/
