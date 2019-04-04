@@ -21,7 +21,7 @@
   echo '</tr>';
   echo '</tr>';
   echo('<td>
-          <p><a href="update_profil.php?idUser='.$userConnecte->get_id_user().'"><button class="button success">Modifier</button></a></p>
+          <p><a href="form/update_profil.php?idUser='.$userConnecte->get_id_user().'"><button class="button success">Modifier</button></a></p>
       </td>');
   echo('<td>
           <p><a href="form'.DS.'afficher_adherents.php?idUser='.$userConnecte->get_id_user().'"><button class="button success">Gestion adhérents</button></a></p>

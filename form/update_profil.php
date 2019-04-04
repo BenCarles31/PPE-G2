@@ -1,16 +1,19 @@
 <?php
 session_start();
-include "init.php";
+include "../init.php";
 $responsableDAO = new ResponsableDAO ();
 
 if (isset($_GET['idUser'])) {
     $idResp = $_GET['idUser'];
+    //instancie un objet responsable correspondant à l'utilisateur connecté
     $userConnecte = $responsableDAO->find($idResp);
 }
-
+$mdp1 = 0;
+$mdp2 = 0;
+//récup formulaire
 $update_profil = isset($_POST['valid_update_profil']) ? $_POST['valid_update_profil'] : '0';
-$mdp1 = isset($_POST['mdp1']) ? $_POST['mdp1'] : 'null';
-$mdp2 = isset($_POST['mdp2']) ? $_POST['mdp2'] : 'null';
+$mdp1 = isset($_POST['mdp1']) ? $_POST['valid_update_profil'] : '0';
+$mdp2 = isset($_POST['mdp2']) ? $_POST['valid_update_profil'] : '0';
 $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
 $prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
 $rue = isset($_POST['rue']) ? $_POST['rue'] : '';
@@ -19,21 +22,31 @@ $ville = isset($_POST['ville']) ? $_POST['ville'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 
 if($update_profil==1){
-  echo $mdp1.'</br>';
-  echo $mdp2.'</br>';
-
-  if($mdp1!='null' && $mdp2!='null'){
-    if($mdp1!=$userConnecte->get_mdp() && $mdp2!=$userConnecte->get_mdp()){
+  echo '<p>'.$mdp1.'</p>';
+  echo '<p>'.$mdp2.'</p>';
+  //contrôle si les 2 champs mdp ont été remplies
+  if($mdp1!==0 && $mdp2!==0){
+    echo '<p>avec mdp</p>';
+    //vérifie si le nouveau mdp n'est pas le même que
+    if($mdp1!=$userConnecte->get_mdp()){
+      //vérifie que les mot de passes sont identiques
       if($mdp1==$mdp2){
+        //mise à jour avec modification de mdp
         $responsableDAO->update($userConnecte->get_id_user(),$nom,$prenom,$rue,$cp,$ville,$email,$mdp1);
       }
     }
-  }
-
-  if($mdp1='null' && $mdp2='null'){
+  }else{
+    echo '<p>sans mdp</p>';
+    //mise à jour sans modification de mdp
     $responsableDAO->update($userConnecte->get_id_user(),$nom,$prenom,$rue,$cp,$ville,$email,$userConnecte->get_mdp());
   }
-  redirige('principal.php');
+  //vérifie que les mot de passes sont identiques
+  /*if(!isset($mdp1) && !isset($mdp2)){
+    echo '<p>sans mdp</p>';
+    //mise à jour sans modification de mdp
+    $responsableDAO->update($userConnecte->get_id_user(),$nom,$prenom,$rue,$cp,$ville,$email,$userConnecte->get_mdp());
+  }*/
+  //redirige('../principal.php');
 }
 ?>
 <!DOCTYPE html>

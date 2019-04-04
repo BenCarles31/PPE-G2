@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "init.php";
+include "../init.php";
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
@@ -53,7 +53,7 @@ $hebergement = isset($_POST['hebergement']) ? $_POST['hebergement'] : 'null';
 if($valid_modif_ligne_bordereau==1){
   $bordereauDAO->update($ligneModifier->get_Id_ligne(),$date_frais,$trajet,$km,$peages,$repas,$hebergement,$motif,$clubAdherent);
 
-  redirige('principal.php');
+  redirige('../principal.php');
 }
 ?>
 <!DOCTYPE html>

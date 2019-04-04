@@ -138,47 +138,34 @@ if($_SESSION['typeUser']==1){
       ?>
       <div class="dialog" id="W_gestion_motif" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'gestion_motif.php' ?></div>
       <div class="dialog" id="W_add_tarif_kilometrique" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="auto"><?php include 'form'.DS.'add_tarif_kilometrique.php'; ?></div>
+      <div class="dialog" id="W_gestion_bordereau" data-role="dialog" data-overlay-click-close="true" data-default-action="false" data-width="w-75"><?php include 'form'.DS.'gestion_bordereau.php'; ?></div>
 
       <div class="tiles-area">
         <div class="tiles-grid tiles-group size-2 fg-white" data-group-title="CRIB">
-          <!-- ouvre le dialog pour affilier un club -->
-          </div>
-          <div class="grid">
-            <div class="row">
-                <a href="gestion_bordereau.php">
-                  <div data-role="tile" class="bg-indigo fg-white">
-                      <span class="mif-github icon"></span>
-                      <span class="branding-bar">Gestion des Bordereau</span>
-                  </div>
-                </a>
-                &nbsp
-              <!-- ouvre le dialog pour ajouter un tarif kilométrique -->
-              <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">
-                <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')"></span>
-                <span class="branding-bar" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">Tarif kilométrique</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="grid">
-            <div class="row">
-              <!-- ouvre le dialog pour ajouter un motif de frais -->
-              <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_motif')">
-                <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_motif')"></span>
-                <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
-              </div>
-              &nbsp
-              <a href="logout.php">
-                <div data-role="tile" class="bg-indigo fg-white">
-                    <span class="mif-github icon"></span>
-                    <span class="branding-bar">Déconnexion</span>
-                </div>
+          <!-- ouvre le dialog pour gérer les bordereau -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_bordereau')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_bordereau')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_bordereau')">Gestion des Bordereau<</span>
+          </div>
+          <!-- ouvre le dialog pour ajouter un tarif kilométrique -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_add_tarif_kilometrique')">Tarif kilométrique</span>
+          </div>
+          <!-- ouvre le dialog pour ajouter un motif de frais -->
+          <div data-role="tile" class="bg-indigo fg-white" onclick="Metro.dialog.open('#W_gestion_motif')">
+            <span class="mif-github icon" onclick="Metro.dialog.open('#W_gestion_motif')"></span>
+            <span class="branding-bar" onclick="Metro.dialog.open('#W_gestion_motif')">Motif de frais</span>
+          </div>
+          <a href="logout.php">
+            <div data-role="tile" class="bg-indigo fg-white">
+                <span class="mif-github icon"></span>
+                <span class="branding-bar">Déconnexion</span>
+            </div>
               </a>
-            </div>
           </div>
-
         </div>
-      </div>
       <?php
         }
       ?>

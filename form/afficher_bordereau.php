@@ -11,7 +11,7 @@ $validByresp = isset($_POST['validerByResp']) ? $_POST['validerByResp'] : '0';
 
 if($validByresp !=0){
   $bordereauDAO->updateStatutBordereau($StatutValider->get_Id_statut(),$bordereauEnCours->get_ID_bordereau());
-  redirige('../principal.php');
+  redirige('principal.php');
 }
 
 $Indemnites = $indemniteDAO->findAll();
@@ -62,7 +62,7 @@ $total_bord =0;
       $total_bord = $total_bord + $LigneFrais->get_Cout_peages() + $LigneFrais->get_Cout_repas() + $LigneFrais->get_Cout_hebergement() + $cout_km;
 
 
-       echo('<td><p><a href="update_ligne.php?idLigne='.$LigneFrais->get_Id_ligne().'"><button class="button success">Modifier</button></a></p>
+       echo('<td><p><a href="form/update_ligne.php?idLigne='.$LigneFrais->get_Id_ligne().'"><button class="button success">Modifier</button></a></p>
                 <form action="#" method="POST">
                   <input type="hidden" name="ligne_supprimer" value='.$LigneFrais->get_Id_ligne().'>
                   <input type="submit" name="val_suppr" class="button alert" value="Supprimer">

@@ -1,5 +1,5 @@
 <?php
-include "init.php";
+include '../init.php';
 $responsableDAO = new ResponsableDAO ();
 $generalDAO = new GeneralDAO();
 $bordereauDAO = new BordereauDAO();
@@ -63,7 +63,7 @@ echo('<thead><tr>
           echo("<td>".$Motif->get_Libelle()."</td>");
         }
       }
-     
+
       foreach($Indemnites as $indemnite){
         $anneeInd = explode("-", $indemnite->get_annee());
         $anneeBord = explode("-", $bordereauEnCours->get_Date_bordereau());
@@ -79,7 +79,7 @@ echo('<thead><tr>
 }
 echo '</table>';
 echo '<p> Total : '.$total_bord.'</p>';
-echo '<p><a href="gestion_bordereau.php">Retour</a> aux bordereaux</p>';
+echo '<p><a href="../principal.php">Retour</a> aux bordereaux</p>';
 ?>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>

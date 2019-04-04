@@ -30,6 +30,19 @@ Class BordereauDAO extends DAO{
     return $bordereau;
   }
 
+  function findBordByStatut($idStatut){
+    $sql = "select * from bordereau where id_statut =:statut";
+    $params = array(":statut" => $idStatut);
+    $sth = $this->executer($sql, $params);
+    $rows = $sth->fetchAll(PDO::FETCH_ASSOC);
+    $tableau = array();
+    foreach ($rows as $row) {
+      $tableau[] = new Bordereau($row);
+    }
+    // Retourne un tableau d\'objet métier
+    return $tableau;
+  }
+
   function findAllBord(){
     $sql = "select * from bordereau";
     $sth = $this->executer($sql);
