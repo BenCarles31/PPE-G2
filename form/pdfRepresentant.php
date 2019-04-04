@@ -48,6 +48,7 @@ foreach($lesClubsadherents as $unClub){
   //recup les infos du club
   $infoclub = $clubDAO->find($unClub->get_ID_club());
 
+  //total du bordereau du club
   $total_bord =0;
 
   //recup des lignes de frais d'un club
@@ -136,6 +137,19 @@ foreach($lesClubsadherents as $unClub){
     $pdf->Cell(50,10,utf8_decode($unAdherentDuClub->get_Nom()).' '.utf8_decode($unAdherentDuClub->get_Prenom()));
     $pdf->ln();
   }
+
+  $pdf->Cell(50,10,utf8_decode('Montant total des dons :'));
+  $pdf->Cell(50,10,utf8_decode($total_bord));
+  $pdf->ln();
+  $pdf->Cell(50,10,utf8_decode('Partie réservé à l\'association'));
+  $pdf->ln();
+  $pdf->Cell(50,10,utf8_decode('N° d\'ordre du Reçu :'));
+  $pdf->Cell(50,10,utf8_decode(''));
+  $pdf->ln();
+  $pdf->Cell(50,10,utf8_decode('Remis le :'));
+  $pdf->ln();
+  $pdf->Cell(50,10,utf8_decode('Signature du Trésorier :'));
+  $pdf->ln();
 }
 
 // Génération du document PDF
