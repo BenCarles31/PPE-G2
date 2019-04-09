@@ -12,6 +12,31 @@ $bordEnAttentes = $bordereauDAO->findBordByStatut($StatutAttente->get_Id_statut(
 $bordClotures = $bordereauDAO->findBordByStatut($StatutCloturer->get_Id_statut());
 $bordValides = $bordereauDAO->findBordByStatut($StatutValider->get_Id_statut());
 
+if(count($bordEnAttentes)>0){
+  // Tableau de bordereau en cours
+  echo '<table class="table bg-white striped table-border">';
+  echo '<caption>Bordereaux en cours</caption>';
+  //entete du tableau
+  echo('<thead><tr>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Date</th>
+          <th>Détails</th>
+       </tr></thead>');
+  foreach($bordEnAttentes as $Bordereau){
+    if($Bordereau->get_Id_statut()==$StatutAttente->get_Id_statut()){
+     $resp_by_bord = $responsableDAO->findRespByIdBordeau($Bordereau->get_ID_bordereau());
+     echo("<tr style='color: black'>");
+     echo '<td>'.$resp_by_bord->get_nom().'</td>';
+     echo '<td>'.$resp_by_bord->get_prenom().'</td>';
+     echo '<td>'.$Bordereau->get_Date_bordereau().'</td>';
+     echo '<td><a href="form/affichage_details_bordereau.php?idBorddereau='.$Bordereau->get_ID_bordereau().'">Détails</a></td>';
+     echo "</tr>";
+   }
+  }
+  echo '</table>';
+}
+
 if(count($bordValides)>0){
   // Tableau de bordereau a cloturer
   echo '<table class="table bg-white striped table-border">';
@@ -40,31 +65,6 @@ if(count($bordValides)>0){
               </form>
           </td>');
       echo "</tr>";
-   }
-  }
-  echo '</table>';
-}
-
-if(count($bordEnAttentes)>0){
-  // Tableau de bordereau en cours
-  echo '<table class="table bg-white striped table-border">';
-  echo '<caption>Bordereaux en cours</caption>';
-  //entete du tableau
-  echo('<thead><tr>
-          <th>Nom</th>
-          <th>Prénom</th>
-          <th>Date</th>
-          <th>Détails</th>
-       </tr></thead>');
-  foreach($bordEnAttentes as $Bordereau){
-    if($Bordereau->get_Id_statut()==$StatutAttente->get_Id_statut()){
-     $resp_by_bord = $responsableDAO->findRespByIdBordeau($Bordereau->get_ID_bordereau());
-     echo("<tr style='color: black'>");
-     echo '<td>'.$resp_by_bord->get_nom().'</td>';
-     echo '<td>'.$resp_by_bord->get_prenom().'</td>';
-     echo '<td>'.$Bordereau->get_Date_bordereau().'</td>';
-     echo '<td><a href="form/affichage_details_bordereau.php?idBorddereau='.$Bordereau->get_ID_bordereau().'">Détails</a></td>';
-     echo "</tr>";
    }
   }
   echo '</table>';
