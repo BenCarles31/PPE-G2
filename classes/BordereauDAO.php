@@ -156,7 +156,7 @@ Class BordereauDAO extends DAO{
 
   function insertLigneFrais($date,$trajet,$km,$peages,$repas,$hebergement,$motif,$idBordereau,$clubAdherent){
     $nb=null;
-    $sql = "insert into ligne_frais values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau,:club_adherent);";
+    $sql = "insert into ligne_frais (`id_ligne`, `date_frais`, `trajet`, `KM`, `cout_peages`, `cout_repas`, `cout_hebergement`, `idMotif`, `ID_bordereau`, `ID_club`) values ('',:date,:trajet,:km,:cout_peages,:cout_repas,:cout_hebergement,:id_motif,:id_bordereau,:club_adherent);";
     $params = array(
       ':date'=>$date,
       ':trajet'=>$trajet,
@@ -196,6 +196,27 @@ Class BordereauDAO extends DAO{
   }
   return $nb; // Retourne le nombre de mise à jour
 } // insert()
+
+
+function findBordByuserStatut($iduser,$idStatut){
+  $sql = "select * from bordereau where id_statut =:statut and id_user = :iduser";
+  $params = array(":statut" => $idStatut,
+                    ":iduser" => $iduser);
+                    $sth = $this->executer($sql, $params);
+                    $row = $sth->fetch(PDO::FETCH_ASSOC);
+                    if ($row) {
+                      $bordereau = new Bordereau($row);
+                    } else {
+                      $bordereau = new Bordereau();
+                    }
+                    // Retourne l'objet métier
+                    return $bordereau;
+                  
+}
+
+
+
+
 
 }
  ?>

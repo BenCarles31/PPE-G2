@@ -12,16 +12,11 @@
  * @param array $bordereaux
  * @return string
  */
-function build_json($message,$token,$bordereaux) {
-  // Horodatage du JSON
-  $now = new DateTime("now", new DateTimeZone('Europe/Paris'));
-  $date = $now->format('Y-m-d H:i:s');
-    
+function build_json($bordereaux) {
+
   $tableau = array(
-    "date" => $date,
-    "message" => $message,
-    "token" => $token,
-    "bordereaux" => $bordereaux
+    
+    "LigneFrais" => $bordereaux
 );
 $json = json_encode($tableau,JSON_PRETTY_PRINT);
 return $json;
@@ -35,24 +30,4 @@ return $json;
 function send_json($json) {
   header("Content-type: application/json; charset=utf-8");
   echo $json;
-}
-
-/**
- * Ajoute un token dans le fichier des tokens
- * @param string $token
- */
-function add_token($token) {
-   file_put_contents(TOKEN_FILENAME,$token.PHP_EOL,FILE_APPEND);  
-}
-
-/**
- * Lit le fichier des tokens dans un tableau PHP
- * @return array
- */
-function get_tokens() {
-  $tableau = array();
-  if (file_exists(TOKEN_FILENAME)) {
-    $tableau = file(TOKEN_FILENAME,FILE_IGNORE_NEW_LINES);
-  }
-  return $tableau;
 }

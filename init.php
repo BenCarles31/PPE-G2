@@ -53,7 +53,8 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
  define('DB_USER','root');
  define('DB_PASSWORD','');
  define('DB_HOST','localhost');
- define('DB_NAME','newfredi');
+ define('DB_NAME','newfredi2');
+
 
  //fonction redirection (remplace header)
 function redirige($url)
@@ -62,8 +63,14 @@ function redirige($url)
 }
 
 /*
-// Emplacement du fichier des tokens
+//Emplacement du fichier des tokens
 define("TOKEN_FILENAME",ROOT.DS."maj".DS."PPE-G2".DS."api".DS."files".DS."tokens.txt");
 
 // Inclut les fonctions
 require_once ROOT."PPE-G2".DS."inc".DS."fonctions.inc.php";*/
+
+
+
+
+// Inclut les fonctions
+require_once "inc".DS."fonctions.inc.php";
